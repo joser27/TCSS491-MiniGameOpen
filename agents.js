@@ -161,146 +161,11 @@ class SpriteCharacter extends Agent {
     }
 }
 
-class Minator extends Agent {
-    constructor(gameController, x, y, width, height) {
-        super(gameController, x, y, width, height);
-        this.speed = 3;
-        
-        // Define sprite sheet layout with scale
-        const MINATOR_SPRITE = {
-            SHEET: {
-                WIDTH: 256,    
-                HEIGHT: 480,   
-                COLUMNS: 4,    
-                ROWS: 4        
-            },
-            SIZE: {
-                WIDTH: 256 / 4,   
-                HEIGHT: 480 / 4   
-            },
-            SCALE: 2,  
-            FRAME_DURATION: 0.2,
-            ANIMATION: {
-                ROWS: {
-                    DOWN: 0,
-                    LEFT: 1,
-                    RIGHT: 2,
-                    UP: 3
-                },
-                FRAMES: 4     
-            }
-        };
-        
-        // Create animators for each direction
-        this.animations = {
-            walkRight: new Animator(
-                ASSET_MANAGER.getAsset("./assets/art/minator.png"), 
-                0,                                              
-                MINATOR_SPRITE.SIZE.HEIGHT * MINATOR_SPRITE.ANIMATION.ROWS.RIGHT,  
-                MINATOR_SPRITE.SIZE.WIDTH, 
-                MINATOR_SPRITE.SIZE.HEIGHT,
-                MINATOR_SPRITE.ANIMATION.FRAMES,
-                MINATOR_SPRITE.FRAME_DURATION,
-                MINATOR_SPRITE.SCALE
-            ),
-            walkLeft: new Animator(
-                ASSET_MANAGER.getAsset("./assets/art/minator.png"), 
-                0,
-                MINATOR_SPRITE.SIZE.HEIGHT * MINATOR_SPRITE.ANIMATION.ROWS.LEFT,
-                MINATOR_SPRITE.SIZE.WIDTH,
-                MINATOR_SPRITE.SIZE.HEIGHT,
-                MINATOR_SPRITE.ANIMATION.FRAMES,
-                MINATOR_SPRITE.FRAME_DURATION,
-                MINATOR_SPRITE.SCALE
-            ),
-            walkUp: new Animator(
-                ASSET_MANAGER.getAsset("./assets/art/minator.png"), 
-                0,
-                MINATOR_SPRITE.SIZE.HEIGHT * MINATOR_SPRITE.ANIMATION.ROWS.UP,
-                MINATOR_SPRITE.SIZE.WIDTH,
-                MINATOR_SPRITE.SIZE.HEIGHT,
-                MINATOR_SPRITE.ANIMATION.FRAMES,
-                MINATOR_SPRITE.FRAME_DURATION,
-                MINATOR_SPRITE.SCALE
-            ),
-            walkDown: new Animator(
-                ASSET_MANAGER.getAsset("./assets/art/minator.png"), 
-                0,
-                MINATOR_SPRITE.SIZE.HEIGHT * MINATOR_SPRITE.ANIMATION.ROWS.DOWN,
-                MINATOR_SPRITE.SIZE.WIDTH,
-                MINATOR_SPRITE.SIZE.HEIGHT,
-                MINATOR_SPRITE.ANIMATION.FRAMES,
-                MINATOR_SPRITE.FRAME_DURATION,
-                MINATOR_SPRITE.SCALE
-            )
-        };
-        
-        this.currentAnimation = this.animations.walkDown;  // Default animation
-        this.facing = 'down';
-    }
-
-    update() {
-        let moving = false;
-        
-        if (this.gameController.gameEngine.keys["d"]) {
-            this.currentAnimation = this.animations.walkRight;
-            this.facing = 'right';
-            this.x += this.speed;
-            moving = true;
-        }
-        if (this.gameController.gameEngine.keys["a"]) {
-            this.currentAnimation = this.animations.walkLeft;
-            this.facing = 'left';
-            this.x -= this.speed;
-            moving = true;
-        }
-        if (this.gameController.gameEngine.keys["w"]) {
-            this.currentAnimation = this.animations.walkUp;
-            this.facing = 'up';
-            this.y -= this.speed;
-            moving = true;
-        }
-        if (this.gameController.gameEngine.keys["s"]) {
-            this.currentAnimation = this.animations.walkDown;
-            this.facing = 'down';
-            this.y += this.speed;
-            moving = true;
-        }
-
-        // If not moving, keep facing the same direction but stop animation
-        if (!moving) {
-            this.currentAnimation = this.animations[`walk${this.facing.charAt(0).toUpperCase() + this.facing.slice(1)}`];
-        }
-    }
-
-    draw(ctx) {
-        // Draw current animation
-        this.currentAnimation.drawFrame(
-            this.gameController.gameEngine.clockTick,
-            ctx,
-            this.x - this.gameController.gameStates.playing.camera.x,
-            this.y - this.gameController.gameStates.playing.camera.y
-        );
-
-        // Debug: draw bounding box
-        const debugCheckbox = document.getElementById('debug');
-        if (!debugCheckbox.checked) return;
-        
-        ctx.strokeStyle = 'red';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(
-            this.x - this.gameController.gameStates.playing.camera.x,
-            this.y - this.gameController.gameStates.playing.camera.y,
-            this.width * params.scale,
-            this.height * params.scale
-        );
-    }
-}
 
 class Mike extends SpriteCharacter {
     constructor(gameController, x, y, width, height) {
         const SPRITE = {
-            spritePath: "./assets/art/Premade_Character_12.png",
+            spritePath: "./assets/images/characters2.png",
             SHEET: {
                 WIDTH: 896,
                 HEIGHT: 640,
@@ -336,7 +201,7 @@ class Mike extends SpriteCharacter {
 class Jake extends SpriteCharacter {
     constructor(gameController, x, y, width, height) {
         const SPRITE = {
-            spritePath: "./assets/art/Premade_Characters20.png",
+            spritePath: "./assets/images/characters2.png",
             SHEET: {
                 WIDTH: 896,
                 HEIGHT: 640,
@@ -637,7 +502,7 @@ class Jake extends SpriteCharacter {
 class Lily extends SpriteCharacter {
     constructor(gameController, x, y, width, height) {
         const SPRITE = {
-            spritePath: "./assets/art/LILY.png",
+            spritePath: "./assets/images/characters2.png",
             SHEET: {
                 WIDTH: 896,
                 HEIGHT: 640,

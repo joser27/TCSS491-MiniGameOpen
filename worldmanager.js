@@ -24,17 +24,17 @@ class WorldManager {
 
         // Define map positions (in grid coordinates)
         this.mapPositions = {
-            dining_room: { x: -50, y: 0 },
-            bathroom: { x: 0, y: 0 },
-            foyer: { x: 50, y: 0 },
-            study: { x: 100, y: 0 },
-            foyer_floor1: { x: 150, y: 0 },
-            kitchen: { x: 200, y: 0 },
-            living_room: { x: 250, y: 0 },
-            starting_room: { x: 300, y: 0 },
-            bedroom1: { x: 350, y: 0 },
+            // dining_room: { x: -50, y: 0 },
+            // bathroom: { x: 0, y: 0 },
+            // foyer: { x: 50, y: 0 },
+            // study: { x: 100, y: 0 },
+            // foyer_floor1: { x: 150, y: 0 },
+            // kitchen: { x: 200, y: 0 },
+            // living_room: { x: 250, y: 0 },
+            // starting_room: { x: 300, y: 0 },
+            // bedroom1: { x: 350, y: 0 },
             outside: { x: 400, y: 0 },
-            basement: { x: 500, y: 0 }
+            // basement: { x: 500, y: 0 }
         };
         
         this.loadMaps();
@@ -283,17 +283,17 @@ class WorldManager {
     loadMaps() {
         // Load all maps
         this.maps = {
-            bathroom: ASSET_MANAGER.getAsset("./assets/tmj/bathroom.tmj"),
-            foyer: ASSET_MANAGER.getAsset("./assets/tmj/foyer.tmj"),
-            study: ASSET_MANAGER.getAsset("./assets/tmj/study.tmj"),
-            foyer_floor1: ASSET_MANAGER.getAsset("./assets/tmj/foyer_floor1.tmj"),
-            kitchen: ASSET_MANAGER.getAsset("./assets/tmj/kitchen.tmj"),
-            living_room: ASSET_MANAGER.getAsset("./assets/tmj/living_room.tmj"),
-            starting_room: ASSET_MANAGER.getAsset("./assets/tmj/starting_room.tmj"),
-            bedroom1: ASSET_MANAGER.getAsset("./assets/tmj/bedroom1.tmj"),
+            // bathroom: ASSET_MANAGER.getAsset("./assets/tmj/bathroom.tmj"),
+            // foyer: ASSET_MANAGER.getAsset("./assets/tmj/foyer.tmj"),
+            // study: ASSET_MANAGER.getAsset("./assets/tmj/study.tmj"),
+            // foyer_floor1: ASSET_MANAGER.getAsset("./assets/tmj/foyer_floor1.tmj"),
+            // kitchen: ASSET_MANAGER.getAsset("./assets/tmj/kitchen.tmj"),
+            // living_room: ASSET_MANAGER.getAsset("./assets/tmj/living_room.tmj"),
+            // starting_room: ASSET_MANAGER.getAsset("./assets/tmj/starting_room.tmj"),
+            // bedroom1: ASSET_MANAGER.getAsset("./assets/tmj/bedroom1.tmj"),
             outside: ASSET_MANAGER.getAsset("./assets/tmj/outside.tmj"),
-            dining_room: ASSET_MANAGER.getAsset("./assets/tmj/dining_room.tmj"),
-            basement: ASSET_MANAGER.getAsset("./assets/tmj/basement.tmj")
+            // dining_room: ASSET_MANAGER.getAsset("./assets/tmj/dining_room.tmj"),
+            // basement: ASSET_MANAGER.getAsset("./assets/tmj/basement.tmj")
         };
         
         // Define tilesets

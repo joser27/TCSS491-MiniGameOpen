@@ -1,7 +1,7 @@
 class Player extends SpriteCharacter {
     constructor(gameController, x, y, width, height) {
         const SPRITE = {
-            spritePath: "./assets/art/Premade_Character_04.png",
+            spritePath: "./assets/images/characters2.png",
             SHEET: {
                 WIDTH: 896,
                 HEIGHT: 640,
