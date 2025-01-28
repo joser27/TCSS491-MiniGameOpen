@@ -4,37 +4,16 @@ class WorldManager {
         this.hasFixedZIndex = true;
         
         this.SHEET_PARAMS = {
-            Room_Builder: {
-                frames: { cols: 76, rows: 113 },
-                dimension: { width: 2432, height: 3616 }
-            },
-            Interior_Builder: {
-                frames: { cols: 16, rows: 1064 },
-                dimension: { width: 512, height: 34048 }
-            },
-            Garden_Builder: {
-                frames: { cols: 32, rows: 196 },
-                dimension: { width: 1024, height: 6272 }
-            },
-            Graveyard_Builder: {
-                frames: { cols: 32, rows: 40 },
-                dimension: { width: 1024, height: 1280 }
+            A4_Nature_Rasak: {
+                frames: { cols: 48, rows: 48 },
+                dimension: { width: 768, height: 768 }
             }
         };
 
         // Define map positions (in grid coordinates)
         this.mapPositions = {
-            // dining_room: { x: -50, y: 0 },
-            // bathroom: { x: 0, y: 0 },
-            // foyer: { x: 50, y: 0 },
-            // study: { x: 100, y: 0 },
-            // foyer_floor1: { x: 150, y: 0 },
-            // kitchen: { x: 200, y: 0 },
-            // living_room: { x: 250, y: 0 },
-            // starting_room: { x: 300, y: 0 },
-            // bedroom1: { x: 350, y: 0 },
             outside: { x: 400, y: 0 },
-            // basement: { x: 500, y: 0 }
+            foyer_floor1: { x: 150, y: 0 },
         };
         
         this.loadMaps();
@@ -47,77 +26,21 @@ class WorldManager {
 
         // Initialize room bounding boxes
         this.roomBoundingBoxes = {
-            bathroom: new BoundingBox(
-                this.mapPositions.bathroom.x * params.tileSize * params.scale,
-                this.mapPositions.bathroom.y * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale,  // width in tiles
-                32 * params.tileSize * params.scale   // height in tiles
-            ),
-            foyer: new BoundingBox(
-                this.mapPositions.foyer.x * params.tileSize * params.scale,
-                this.mapPositions.foyer.y * params.tileSize * params.scale,
-                28 * params.tileSize * params.scale,
-                28 * params.tileSize * params.scale
-            ),
-            study: new BoundingBox(
-                this.mapPositions.study.x * params.tileSize * params.scale,
-                this.mapPositions.study.y * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale
-            ),
-            foyer_floor1: new BoundingBox(
-                this.mapPositions.foyer_floor1.x * params.tileSize * params.scale,
-                this.mapPositions.foyer_floor1.y * params.tileSize * params.scale,
-                20 * params.tileSize * params.scale,
-                24 * params.tileSize * params.scale
-            ),
-            kitchen: new BoundingBox(
-                this.mapPositions.kitchen.x * params.tileSize * params.scale,
-                this.mapPositions.kitchen.y * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale
-            ),
-            living_room: new BoundingBox(
-                this.mapPositions.living_room.x * params.tileSize * params.scale,
-                this.mapPositions.living_room.y * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale
-            ),
-            starting_room: new BoundingBox(
-                this.mapPositions.starting_room.x * params.tileSize * params.scale,
-                this.mapPositions.starting_room.y * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale
-            ),
-            bedroom1: new BoundingBox(
-                this.mapPositions.bedroom1.x * params.tileSize * params.scale,
-                this.mapPositions.bedroom1.y * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale
-            ),
             outside: new BoundingBox(
                 this.mapPositions.outside.x * params.tileSize * params.scale,
                 this.mapPositions.outside.y * params.tileSize * params.scale,
                 64 * params.tileSize * params.scale,
                 64 * params.tileSize * params.scale
             ),
-            dining_room: new BoundingBox(
-                this.mapPositions.dining_room.x * params.tileSize * params.scale,
-                this.mapPositions.dining_room.y * params.tileSize * params.scale,
+            foyer_floor1: new BoundingBox(
+                this.mapPositions.foyer_floor1.x * params.tileSize * params.scale,
+                this.mapPositions.foyer_floor1.y * params.tileSize * params.scale,
                 32 * params.tileSize * params.scale,
                 32 * params.tileSize * params.scale
             ),
-            basement: new BoundingBox(
-                this.mapPositions.basement.x * params.tileSize * params.scale,
-                this.mapPositions.basement.y * params.tileSize * params.scale,
-                64 * params.tileSize * params.scale,
-                64 * params.tileSize * params.scale
-            )
         };
 
-        this.COLLISION_TILE_ID = 12028;
-        this.COLLISION_TILE_ID_2 = 13595; 
-        this.COLLISION_TILE_ID_3 = 1335; 
+        this.COLLISION_TILE_ID = 1465; // Update if this is different for your tileset
         this.collisionMap = {}; // store collision data for each room
         this.loadCollisionData();
 
@@ -133,15 +56,15 @@ class WorldManager {
         // Initialize map cache
         this.inspectableItems = new InspectableItemManager(this.gameController);
         this.initializeMapCache();
-        this.loadInspectableItems();
-        this.desk = new Desk(this, 156*params.tileSize*params.scale, 13*params.tileSize*params.scale, 32, 32);
-        this.gameController.gameEngine.addEntity(this.desk);
-        this.chair = new Chair(this, 159*params.tileSize*params.scale, 17*params.tileSize*params.scale, 32, 32);
-        this.gameController.gameEngine.addEntity(this.chair);
-        this.bookcase = new Bookcase(this, 162*params.tileSize*params.scale, 17*params.tileSize*params.scale, 32, 32);
-        this.gameController.gameEngine.addEntity(this.bookcase);
+        // this.loadInspectableItems();
+        // // this.desk = new Desk(this, 156*params.tileSize*params.scale, 13*params.tileSize*params.scale, 32, 32);
+        // // this.gameController.gameEngine.addEntity(this.desk);
+        // // this.chair = new Chair(this, 159*params.tileSize*params.scale, 17*params.tileSize*params.scale, 32, 32);
+        // // this.gameController.gameEngine.addEntity(this.chair);
+        // // this.bookcase = new Bookcase(this, 162*params.tileSize*params.scale, 17*params.tileSize*params.scale, 32, 32);
+        // // this.gameController.gameEngine.addEntity(this.bookcase);
 
-        this.worldObjects = [this.desk, this.chair, this.bookcase];
+        this.worldObjects = [];
     }
 
     loadInspectableItems() {
@@ -283,62 +206,25 @@ class WorldManager {
     loadMaps() {
         // Load all maps
         this.maps = {
-            // bathroom: ASSET_MANAGER.getAsset("./assets/tmj/bathroom.tmj"),
-            // foyer: ASSET_MANAGER.getAsset("./assets/tmj/foyer.tmj"),
-            // study: ASSET_MANAGER.getAsset("./assets/tmj/study.tmj"),
-            // foyer_floor1: ASSET_MANAGER.getAsset("./assets/tmj/foyer_floor1.tmj"),
-            // kitchen: ASSET_MANAGER.getAsset("./assets/tmj/kitchen.tmj"),
-            // living_room: ASSET_MANAGER.getAsset("./assets/tmj/living_room.tmj"),
-            // starting_room: ASSET_MANAGER.getAsset("./assets/tmj/starting_room.tmj"),
-            // bedroom1: ASSET_MANAGER.getAsset("./assets/tmj/bedroom1.tmj"),
             outside: ASSET_MANAGER.getAsset("./assets/tmj/outside.tmj"),
-            // dining_room: ASSET_MANAGER.getAsset("./assets/tmj/dining_room.tmj"),
-            // basement: ASSET_MANAGER.getAsset("./assets/tmj/basement.tmj")
+            foyer_floor1: ASSET_MANAGER.getAsset("./assets/tmj/foyer_floor1.tmj")
         };
         
         // Define tilesets
         this.tilesets = {
-            'Room_Builder_32x32': {
-                image: ASSET_MANAGER.getAsset("./assets/art/Room_Builder_32x32.png"),
+            'A4_Nature_Rasak': {
+                image: ASSET_MANAGER.getAsset("./assets/images/A4_Nature_Rasak.png"),
                 firstgid: 1,
-                tileWidth: this.SHEET_PARAMS.Room_Builder.dimension.width / this.SHEET_PARAMS.Room_Builder.frames.cols,
-                tileHeight: this.SHEET_PARAMS.Room_Builder.dimension.height / this.SHEET_PARAMS.Room_Builder.frames.rows,
-                cols: this.SHEET_PARAMS.Room_Builder.frames.cols
+                tileWidth: 16,
+                tileHeight: 16,
+                cols: 48
             },
-            'Interiors_32x32': {
-                image: ASSET_MANAGER.getAsset("./assets/art/Interiors_32x32.png"),
-                firstgid: this.SHEET_PARAMS.Room_Builder.frames.cols * this.SHEET_PARAMS.Room_Builder.frames.rows + 1,
-                tileWidth: this.SHEET_PARAMS.Interior_Builder.dimension.width / this.SHEET_PARAMS.Interior_Builder.frames.cols,
-                tileHeight: this.SHEET_PARAMS.Interior_Builder.dimension.height / this.SHEET_PARAMS.Interior_Builder.frames.rows,
-                cols: this.SHEET_PARAMS.Interior_Builder.frames.cols
-            },
-            '3_City_Props_32x32': {
-                image: ASSET_MANAGER.getAsset("./assets/art/3_City_Props_32x32.png"),
+            'Tileset': {
+                image: ASSET_MANAGER.getAsset("./assets/images/Tileset.png"),
                 firstgid: 1,
-                tileWidth: 32,
-                tileHeight: 32,
-                cols: 32
-            },
-            '17_Garden_32x32': {
-                image: ASSET_MANAGER.getAsset("./assets/art/17_Garden_32x32.png"),
-                firstgid: 7009,
-                tileWidth: 32,
-                tileHeight: 32,
-                cols: 32
-            },
-            '19_Graveyard_32x32': {
-                image: ASSET_MANAGER.getAsset("./assets/art/19_Graveyard_32x32.png"),
-                firstgid: 13281,
-                tileWidth: 32,
-                tileHeight: 32,
-                cols: 32
-            },
-            '11_Camping_32x32': {
-                image: ASSET_MANAGER.getAsset("./assets/art/11_Camping_32x32.png"),
-                firstgid: 14561,
-                tileWidth: 32,
-                tileHeight: 32,
-                cols: 32
+                tileWidth: 16,
+                tileHeight: 16,
+                cols: 20
             }
         };
     }
@@ -679,15 +565,14 @@ class WorldManager {
     }
 
     getTileset(mapName, tileId) {
+        // Return appropriate tileset based on map name
         if (mapName === 'outside') {
-            if (tileId < 7009) return this.tilesets['3_City_Props_32x32'];
-            if (tileId < 13281) return this.tilesets['17_Garden_32x32'];
-            if (tileId < 14561) return this.tilesets['19_Graveyard_32x32'];
-            return this.tilesets['11_Camping_32x32'];
+            return this.tilesets['A4_Nature_Rasak'];
+        } else if (mapName === 'foyer_floor1') {
+            return this.tilesets['Tileset'];
         }
-        return tileId < this.tilesets['Interiors_32x32'].firstgid
-            ? this.tilesets['Room_Builder_32x32']
-            : this.tilesets['Interiors_32x32'];
+        // Default fallback
+        return this.tilesets['A4_Nature_Rasak'];
     }
 
     draw(ctx) {
@@ -789,9 +674,7 @@ class WorldManager {
             // Store collision tile positions as BoundingBoxes
             const width = collisionLayer.width;
             collisionLayer.data.forEach((tileId, index) => {
-                if (tileId === this.COLLISION_TILE_ID || 
-                    tileId === this.COLLISION_TILE_ID_2 || 
-                    tileId === this.COLLISION_TILE_ID_3) {
+                if (tileId === this.COLLISION_TILE_ID) {
                     const x = index % width;
                     const y = Math.floor(index / width);
                     

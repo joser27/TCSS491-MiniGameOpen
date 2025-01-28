@@ -43,19 +43,19 @@ class SpriteCharacter extends Agent {
         // Create animators for all directions and states
         this.animations = {
             walkRight: new Animator(
-                ASSET_MANAGER.getAsset(spriteConfig.spritePath), 
-                spriteConfig.SIZE.WIDTH * spriteConfig.ANIMATION.COLUMNS.RIGHT,
-                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.WALK,
-                spriteConfig.SIZE.WIDTH, 
-                spriteConfig.SIZE.HEIGHT,
-                spriteConfig.ANIMATION.FRAMES,
-                spriteConfig.FRAME_DURATION,
-                spriteConfig.SCALE
+                ASSET_MANAGER.getAsset(spriteConfig.spritePath), // spritesheet: The image containing all animation frames
+                spriteConfig.SIZE.WIDTH * spriteConfig.ANIMATION.COLUMNS.RIGHT,                                      // xStart: Starting X position on spritesheet for this animation
+                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.RIGHT,                                       // yStart: Starting Y position on spritesheet for this animation
+                spriteConfig.SIZE.WIDTH,                                        // width: Width of each frame in the animation
+                spriteConfig.SIZE.HEIGHT,                                         // height: Height of each frame in the animation
+                spriteConfig.ANIMATION.FRAMES,                                               // frameCount: Number of frames in this animation sequence
+                spriteConfig.FRAME_DURATION,                                             // frameDuration: Time each frame is displayed (in seconds)
+                spriteConfig.SCALE                               // scale: Size multiplier for drawing the sprite
             ),
             walkUp: new Animator(
                 ASSET_MANAGER.getAsset(spriteConfig.spritePath), 
                 spriteConfig.SIZE.WIDTH * spriteConfig.ANIMATION.COLUMNS.UP,
-                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.WALK,
+                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.UP,
                 spriteConfig.SIZE.WIDTH, 
                 spriteConfig.SIZE.HEIGHT,
                 spriteConfig.ANIMATION.FRAMES,
@@ -65,7 +65,7 @@ class SpriteCharacter extends Agent {
             walkLeft: new Animator(
                 ASSET_MANAGER.getAsset(spriteConfig.spritePath), 
                 spriteConfig.SIZE.WIDTH * spriteConfig.ANIMATION.COLUMNS.LEFT,
-                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.WALK,
+                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.LEFT,
                 spriteConfig.SIZE.WIDTH, 
                 spriteConfig.SIZE.HEIGHT,
                 spriteConfig.ANIMATION.FRAMES,
@@ -75,7 +75,7 @@ class SpriteCharacter extends Agent {
             walkDown: new Animator(
                 ASSET_MANAGER.getAsset(spriteConfig.spritePath), 
                 spriteConfig.SIZE.WIDTH * spriteConfig.ANIMATION.COLUMNS.DOWN,
-                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.WALK,
+                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.DOWN,
                 spriteConfig.SIZE.WIDTH, 
                 spriteConfig.SIZE.HEIGHT,
                 spriteConfig.ANIMATION.FRAMES,
@@ -84,42 +84,42 @@ class SpriteCharacter extends Agent {
             ),
             idleRight: new Animator(
                 ASSET_MANAGER.getAsset(spriteConfig.spritePath), 
-                spriteConfig.SIZE.WIDTH * spriteConfig.ANIMATION.COLUMNS.RIGHT,
-                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.IDLE,
+                spriteConfig.SIZE.WIDTH * (spriteConfig.ANIMATION.COLUMNS.RIGHT+1),
+                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.RIGHT,
                 spriteConfig.SIZE.WIDTH, 
                 spriteConfig.SIZE.HEIGHT,
-                spriteConfig.ANIMATION.FRAMES,
-                spriteConfig.FRAME_DURATION,
+                1,
+                1,
                 spriteConfig.SCALE
             ),
             idleUp: new Animator(
                 ASSET_MANAGER.getAsset(spriteConfig.spritePath), 
-                spriteConfig.SIZE.WIDTH * spriteConfig.ANIMATION.COLUMNS.UP,
-                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.IDLE,
+                spriteConfig.SIZE.WIDTH * (spriteConfig.ANIMATION.COLUMNS.UP+1),
+                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.UP,
                 spriteConfig.SIZE.WIDTH, 
                 spriteConfig.SIZE.HEIGHT,
-                spriteConfig.ANIMATION.FRAMES,
-                spriteConfig.FRAME_DURATION,
+                1,
+                1,
                 spriteConfig.SCALE
             ),
             idleLeft: new Animator(
                 ASSET_MANAGER.getAsset(spriteConfig.spritePath), 
-                spriteConfig.SIZE.WIDTH * spriteConfig.ANIMATION.COLUMNS.LEFT,
-                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.IDLE,
+                spriteConfig.SIZE.WIDTH * (spriteConfig.ANIMATION.COLUMNS.LEFT+1),
+                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.LEFT,
                 spriteConfig.SIZE.WIDTH, 
                 spriteConfig.SIZE.HEIGHT,
-                spriteConfig.ANIMATION.FRAMES,
-                spriteConfig.FRAME_DURATION,
+                1,
+                1,
                 spriteConfig.SCALE
             ),
             idleDown: new Animator(
                 ASSET_MANAGER.getAsset(spriteConfig.spritePath), 
-                spriteConfig.SIZE.WIDTH * spriteConfig.ANIMATION.COLUMNS.DOWN,
-                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.IDLE,
+                spriteConfig.SIZE.WIDTH * (spriteConfig.ANIMATION.COLUMNS.DOWN+1),
+                spriteConfig.SIZE.HEIGHT * spriteConfig.ANIMATION.ROWS.DOWN,
                 spriteConfig.SIZE.WIDTH, 
                 spriteConfig.SIZE.HEIGHT,
-                spriteConfig.ANIMATION.FRAMES,
-                spriteConfig.FRAME_DURATION,
+                1,
+                1,
                 spriteConfig.SCALE
             )
         };
@@ -167,29 +167,31 @@ class Mike extends SpriteCharacter {
         const SPRITE = {
             spritePath: "./assets/images/characters2.png",
             SHEET: {
-                WIDTH: 896,
-                HEIGHT: 640,
-                COLUMNS: 56,
-                ROWS: 20
+                WIDTH: 576,
+                HEIGHT: 384,
+                COLUMNS: 12,
+                ROWS: 8
             },
             SIZE: {
-                WIDTH: 896 / 56,
-                HEIGHT: 640 / 20
+                WIDTH: 576 / 12,
+                HEIGHT: 384 / 8
             },
             SCALE: 2,
             FRAME_DURATION: 0.15,
             ANIMATION: {
                 ROWS: {
-                    IDLE: 1,
-                    WALK: 2
+                    RIGHT: 2,
+                    UP: 3,
+                    LEFT: 1,
+                    DOWN: 0
                 },
                 COLUMNS: {
-                    RIGHT: 0,
+                    RIGHT: 6,
                     UP: 6,
-                    LEFT: 12,
-                    DOWN: 18
+                    LEFT: 6,
+                    DOWN: 6
                 },
-                FRAMES: 6
+                FRAMES: 3
             }
         };
         
@@ -203,29 +205,31 @@ class Jake extends SpriteCharacter {
         const SPRITE = {
             spritePath: "./assets/images/characters2.png",
             SHEET: {
-                WIDTH: 896,
-                HEIGHT: 640,
-                COLUMNS: 56,
-                ROWS: 20
+                WIDTH: 576,
+                HEIGHT: 384,
+                COLUMNS: 12,
+                ROWS: 8
             },
             SIZE: {
-                WIDTH: 896 / 56,
-                HEIGHT: 640 / 20
+                WIDTH: 576 / 12,
+                HEIGHT: 384 / 8
             },
             SCALE: 2,
             FRAME_DURATION: 0.15,
             ANIMATION: {
                 ROWS: {
-                    IDLE: 1,
-                    WALK: 2
+                    RIGHT: 2,
+                    UP: 3,
+                    LEFT: 1,
+                    DOWN: 0
                 },
                 COLUMNS: {
-                    RIGHT: 0,
+                    RIGHT: 6,
                     UP: 6,
-                    LEFT: 12,
-                    DOWN: 18
+                    LEFT: 6,
+                    DOWN: 6
                 },
-                FRAMES: 6
+                FRAMES: 3
             }
         };
         
@@ -504,29 +508,31 @@ class Lily extends SpriteCharacter {
         const SPRITE = {
             spritePath: "./assets/images/characters2.png",
             SHEET: {
-                WIDTH: 896,
-                HEIGHT: 640,
-                COLUMNS: 56,
-                ROWS: 20
+                WIDTH: 576,
+                HEIGHT: 384,
+                COLUMNS: 12,
+                ROWS: 8
             },
             SIZE: {
-                WIDTH: 896 / 56,
-                HEIGHT: 640 / 20
+                WIDTH: 576 / 12,
+                HEIGHT: 384 / 8
             },
             SCALE: 2,
             FRAME_DURATION: 0.15,
             ANIMATION: {
                 ROWS: {
-                    IDLE: 1,
-                    WALK: 2
+                    RIGHT: 2,
+                    UP: 3,
+                    LEFT: 1,
+                    DOWN: 0
                 },
                 COLUMNS: {
-                    RIGHT: 0,
+                    RIGHT: 6,
                     UP: 6,
-                    LEFT: 12,
-                    DOWN: 18
+                    LEFT: 6,
+                    DOWN: 6
                 },
-                FRAMES: 6
+                FRAMES: 3
             }
         };
         

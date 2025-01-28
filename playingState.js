@@ -47,7 +47,6 @@ class PlayingState extends GameState {
         this.outsideAmbience = ASSET_MANAGER.getAsset("./assets/audio/night-cricket-ambience-22484.mp3");
         
         this.wasIPressed = false;
-
     }
 
     initEntities() {
@@ -57,7 +56,7 @@ class PlayingState extends GameState {
         this.gameController.gameEngine.addEntity(this.lily);
         this.gameController.gameEngine.addEntity(this.mike);
         this.gameController.gameEngine.addEntity(this.player);
-        this.gameController.gameEngine.addEntity(this.rat);
+        // this.gameController.gameEngine.addEntity(this.rat);
         this.gameController.gameEngine.addEntity(this.storyManager);
         this.gameController.gameEngine.addEntity(this.worldManager);
         this.gameController.gameEngine.addEntity(this.camera);
@@ -130,16 +129,16 @@ class PlayingState extends GameState {
         // this.storyManager.update();
         
 
-        if (!this.storyManager.flags.hasSplitUp && 
-            this.worldManager.getCurrentRoom(this.player) === "foyer_floor1") {
-            this.storyManager.triggerEvent('splitUpSequence');
-        }
+        // if (!this.storyManager.flags.hasSplitUp && 
+        //     this.worldManager.getCurrentRoom(this.player) === "foyer_floor1") {
+        //     this.storyManager.triggerEvent('splitUpSequence');
+        // }
 
-        // checking for trigger conditions; rat
-        if (!this.storyManager.flags.hasSeenFirstRat && 
-            this.player.boundingBox.collide(this.rat.boundingBox)) {
-            this.storyManager.triggerEvent('firstRatEncounter');
-        }
+        // // checking for trigger conditions; rat
+        // if (!this.storyManager.flags.hasSeenFirstRat && 
+        //     this.player.boundingBox.collide(this.rat.boundingBox)) {
+        //     this.storyManager.triggerEvent('firstRatEncounter');
+        // }
 
     }
 

@@ -3,29 +3,31 @@ class Player extends SpriteCharacter {
         const SPRITE = {
             spritePath: "./assets/images/characters2.png",
             SHEET: {
-                WIDTH: 896,
-                HEIGHT: 640,
-                COLUMNS: 56,
-                ROWS: 20
+                WIDTH: 576,
+                HEIGHT: 384,
+                COLUMNS: 12,
+                ROWS: 8
             },
             SIZE: {
-                WIDTH: 896 / 56,
-                HEIGHT: 640 / 20
+                WIDTH: 576 / 12,
+                HEIGHT: 384 / 8
             },
-            SCALE: 2,
+            SCALE: 1.5,
             FRAME_DURATION: 0.15,
             ANIMATION: {
                 ROWS: {
-                    IDLE: 1,
-                    WALK: 2
+                    RIGHT: 2,
+                    UP: 3,
+                    LEFT: 1,
+                    DOWN: 0
                 },
                 COLUMNS: {
-                    RIGHT: 0,
+                    RIGHT: 6,
                     UP: 6,
-                    LEFT: 12,
-                    DOWN: 18
+                    LEFT: 6,
+                    DOWN: 6
                 },
-                FRAMES: 6
+                FRAMES: 3
             }
         };
         
