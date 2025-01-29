@@ -5,17 +5,16 @@ const ASSET_MANAGER = new AssetManager();
 //TMJ
 ASSET_MANAGER.queueDownload("./assets/tmj/outside2.tmj");
 ASSET_MANAGER.queueDownload("./assets/tmj/foyer_floor1.tmj");
-// ASSET_MANAGER.queueDownload("./assets/tmj/bathroom.tmj");
-// ASSET_MANAGER.queueDownload("./assets/tmj/foyer.tmj");
-// ASSET_MANAGER.queueDownload("./assets/tmj/study.tmj");
-// ASSET_MANAGER.queueDownload("./assets/tmj/foyer_floor1.tmj");
-// ASSET_MANAGER.queueDownload("./assets/tmj/kitchen.tmj");
-// ASSET_MANAGER.queueDownload("./assets/tmj/living_room.tmj");
-// ASSET_MANAGER.queueDownload("./assets/tmj/starting_room.tmj");
-// ASSET_MANAGER.queueDownload("./assets/tmj/bedroom1.tmj");
-// ASSET_MANAGER.queueDownload("./assets/tmj/outside.tmj");
-// ASSET_MANAGER.queueDownload("./assets/tmj/dining_room.tmj");
-// ASSET_MANAGER.queueDownload("./assets/tmj/basement.tmj");
+ASSET_MANAGER.queueDownload("./assets/tmj/bathroom.tmj");
+ASSET_MANAGER.queueDownload("./assets/tmj/foyer_floor2.tmj");
+ASSET_MANAGER.queueDownload("./assets/tmj/study.tmj");
+ASSET_MANAGER.queueDownload("./assets/tmj/kitchen.tmj");
+ASSET_MANAGER.queueDownload("./assets/tmj/bedroom2.tmj");
+ASSET_MANAGER.queueDownload("./assets/tmj/bedroom1.tmj");
+ASSET_MANAGER.queueDownload("./assets/tmj/outside.tmj");
+ASSET_MANAGER.queueDownload("./assets/tmj/dining_room.tmj");
+ASSET_MANAGER.queueDownload("./assets/tmj/basement.tmj");
+ASSET_MANAGER.queueDownload("./assets/tmj/living_room.tmj");
 
 //PNG
 ASSET_MANAGER.queueDownload("./assets/images/characters2.png");

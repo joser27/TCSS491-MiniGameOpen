@@ -109,24 +109,11 @@ class PlayingState extends GameState {
                 this.outsideAmbience.currentTime = 0;
             }
         }
-        // if (this.storyManager.isInCutscene) { 
-        //     this.storyManager.update();
-        //     return;
-        // }
-        
+
         if (this.gameController.gameEngine.keys["Escape"]) {
             this.gameController.changeState(this.gameController.gameStates.menu);
         }
-        // this.worldManager.update();
-        // this.player.update();
-        // this.jake.update();
-        // this.lily.update();
-        // this.mike.update();
-        // this.rat.update();
 
-        // this.camera.update();
-
-        // this.storyManager.update();
         
 
         if (!this.storyManager.flags.hasSplitUp && 

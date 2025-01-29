@@ -127,17 +127,17 @@ class StoryManager {
                 this.fadeLevel = 1;
 
                 // Jake's position
-                this.gameController.gameStates.playing.jake.x = 159 * params.tileSize * params.scale;
-                this.gameController.gameStates.playing.jake.y = 18 * params.tileSize * params.scale;
+                this.gameController.gameStates.playing.jake.x = 166 * params.tileSize * params.scale;
+                this.gameController.gameStates.playing.jake.y = 25 * params.tileSize * params.scale;
                 this.gameController.gameStates.playing.jake.currentAnimation = this.gameController.gameStates.playing.jake.animations.idleLeft;
 
                 // Mike's position
-                this.gameController.gameStates.playing.mike.x = 155 * params.tileSize * params.scale;
-                this.gameController.gameStates.playing.mike.y = 17* params.tileSize * params.scale;
+                this.gameController.gameStates.playing.mike.x = 162 * params.tileSize * params.scale;
+                this.gameController.gameStates.playing.mike.y = 25 * params.tileSize * params.scale;
 
                 // Lily's position
-                this.gameController.gameStates.playing.lily.x = 155 * params.tileSize * params.scale;
-                this.gameController.gameStates.playing.lily.y = 19 * params.tileSize * params.scale;
+                this.gameController.gameStates.playing.lily.x = 160 * params.tileSize * params.scale;
+                this.gameController.gameStates.playing.lily.y = 26 * params.tileSize * params.scale;
                 this.gameController.gameStates.playing.lily.currentAnimation = this.gameController.gameStates.playing.lily.animations.idleRight;
                 
                 // Fade in from black

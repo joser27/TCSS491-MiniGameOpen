@@ -12,8 +12,17 @@ class WorldManager {
 
         // Define map positions (in grid coordinates)
         this.mapPositions = {
-            outside: { x: 400, y: 0 },
+            dining_room: { x: -50, y: 0 },
+            bathroom: { x: 0, y: 0 },
+            foyer_floor2: { x: 50, y: 0 },
+            study: { x: 100, y: 0 },
             foyer_floor1: { x: 150, y: 0 },
+            kitchen: { x: 200, y: 0 },
+            living_room: { x: 250, y: 0 },
+            bedroom2: { x: 300, y: 0 },
+            bedroom1: { x: 350, y: 0 },
+            outside: { x: 400, y: 0 },
+            basement: { x: 500, y: 0 }
         };
         
         this.loadMaps();
@@ -26,11 +35,23 @@ class WorldManager {
 
         // Initialize room bounding boxes
         this.roomBoundingBoxes = {
-            outside: new BoundingBox(
-                this.mapPositions.outside.x * params.tileSize * params.scale,
-                this.mapPositions.outside.y * params.tileSize * params.scale,
-                64 * params.tileSize * params.scale,
-                64 * params.tileSize * params.scale
+            bathroom: new BoundingBox(
+                this.mapPositions.bathroom.x * params.tileSize * params.scale,
+                this.mapPositions.bathroom.y * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale,  // width in tiles
+                32 * params.tileSize * params.scale   // height in tiles
+            ),
+            foyer_floor2: new BoundingBox(
+                this.mapPositions.foyer_floor2.x * params.tileSize * params.scale,
+                this.mapPositions.foyer_floor2.y * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale
+            ),
+            study: new BoundingBox(
+                this.mapPositions.study.x * params.tileSize * params.scale,
+                this.mapPositions.study.y * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale
             ),
             foyer_floor1: new BoundingBox(
                 this.mapPositions.foyer_floor1.x * params.tileSize * params.scale,
@@ -38,6 +59,48 @@ class WorldManager {
                 32 * params.tileSize * params.scale,
                 32 * params.tileSize * params.scale
             ),
+            kitchen: new BoundingBox(
+                this.mapPositions.kitchen.x * params.tileSize * params.scale,
+                this.mapPositions.kitchen.y * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale
+            ),
+            living_room: new BoundingBox(
+                this.mapPositions.living_room.x * params.tileSize * params.scale,
+                this.mapPositions.living_room.y * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale
+            ),
+            bedroom2: new BoundingBox(
+                this.mapPositions.bedroom2.x * params.tileSize * params.scale,
+                this.mapPositions.bedroom2.y * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale
+            ),
+            bedroom1: new BoundingBox(
+                this.mapPositions.bedroom1.x * params.tileSize * params.scale,
+                this.mapPositions.bedroom1.y * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale
+            ),
+            outside: new BoundingBox(
+                this.mapPositions.outside.x * params.tileSize * params.scale,
+                this.mapPositions.outside.y * params.tileSize * params.scale,
+                64 * params.tileSize * params.scale,
+                64 * params.tileSize * params.scale
+            ),
+            dining_room: new BoundingBox(
+                this.mapPositions.dining_room.x * params.tileSize * params.scale,
+                this.mapPositions.dining_room.y * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale
+            ),
+            basement: new BoundingBox(
+                this.mapPositions.basement.x * params.tileSize * params.scale,
+                this.mapPositions.basement.y * params.tileSize * params.scale,
+                64 * params.tileSize * params.scale,
+                64 * params.tileSize * params.scale
+            )
         };
 
         this.COLLISION_TILE_ID = 1465; // Update if this is different for your tileset
@@ -207,7 +270,16 @@ class WorldManager {
         // Load all maps
         this.maps = {
             outside: ASSET_MANAGER.getAsset("./assets/tmj/outside2.tmj"),
-            foyer_floor1: ASSET_MANAGER.getAsset("./assets/tmj/foyer_floor1.tmj")
+            foyer_floor1: ASSET_MANAGER.getAsset("./assets/tmj/foyer_floor1.tmj"),
+            bathroom: ASSET_MANAGER.getAsset("./assets/tmj/bathroom.tmj"),
+            foyer_floor2: ASSET_MANAGER.getAsset("./assets/tmj/foyer_floor2.tmj"),
+            study: ASSET_MANAGER.getAsset("./assets/tmj/study.tmj"),
+            kitchen: ASSET_MANAGER.getAsset("./assets/tmj/kitchen.tmj"),
+            bedroom2: ASSET_MANAGER.getAsset("./assets/tmj/bedroom2.tmj"),
+            bedroom1: ASSET_MANAGER.getAsset("./assets/tmj/bedroom1.tmj"),
+            dining_room: ASSET_MANAGER.getAsset("./assets/tmj/dining_room.tmj"),
+            basement: ASSET_MANAGER.getAsset("./assets/tmj/basement.tmj"),
+            living_room: ASSET_MANAGER.getAsset("./assets/tmj/living_room.tmj"),
         };
         
         // Define tilesets
@@ -230,7 +302,6 @@ class WorldManager {
     }
 
     initializeDoors() {
-        console.log(this.gameController.gameStates)
         // Door from bathroom to foyer floor 2
         this.doors.push(new Door(
             this.gameController,
@@ -328,18 +399,18 @@ class WorldManager {
             // Door position
             153 * params.tileSize * params.scale,
             9 * params.tileSize * params.scale,
-            params.tileSize * params.scale,
+            params.tileSize * 4 * params.scale,
             params.tileSize * 1 * params.scale,
             // Destination
             53 * params.tileSize * params.scale,
             12 * params.tileSize * params.scale
         ));
-        // Door from foyer 1 room to kitchen
+        // Door from foyer floor 1 room to kitchen
         this.doors.push(new Door(
             this.gameController,
             // Door position
             150 * params.tileSize * params.scale,
-            17 * params.tileSize * params.scale,
+            22 * params.tileSize * params.scale,
             params.tileSize * params.scale,
             params.tileSize * 2 * params.scale,
             // Destination
@@ -444,19 +515,19 @@ class WorldManager {
             163 * params.tileSize * params.scale,
             17 * params.tileSize * params.scale
         ));    
-        // Door from foyer 1 to study
+        // Door from foyer floor 1 to study
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            165 * params.tileSize * params.scale,
-            17 * params.tileSize * params.scale,
+            181 * params.tileSize * params.scale,
+            22 * params.tileSize * params.scale,
             params.tileSize * params.scale,
             params.tileSize * 2 * params.scale,
             // Destination
             101 * params.tileSize * params.scale,
             20 * params.tileSize * params.scale
         ));    
-        // Outside to foyer
+        // Outside to foyer floor 1
         this.doors.push(new Door(
             this.gameController,
             // Door position
@@ -465,10 +536,10 @@ class WorldManager {
             params.tileSize * params.scale,
             params.tileSize * 2 * params.scale,
             // Destination
-            157 * params.tileSize * params.scale,
-            19 * params.tileSize * params.scale
+            165 * params.tileSize * params.scale,
+            27 * params.tileSize * params.scale
         ));
-        // Door from foyer to nothing
+        // Door from foyer floor 2 to nothing
         this.doors.push(new Door(
             this.gameController,
             // Door position
@@ -481,12 +552,12 @@ class WorldManager {
             19 * params.tileSize * params.scale,
             true,
         ));
-        // Door from foyer 1 to basement
+        // Door from foyer floor 1 to basement
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            163 * params.tileSize * params.scale,
-            12 * params.tileSize * params.scale,
+            175 * params.tileSize * params.scale,
+            16 * params.tileSize * params.scale,
             params.tileSize *2* params.scale,
             params.tileSize * params.scale,
             // Destination
@@ -570,9 +641,11 @@ class WorldManager {
             return this.tilesets['pixellands'];
         } else if (mapName === 'foyer_floor1') {
             return this.tilesets['Tileset'];
+        } else if (mapName === 'bathroom') {
+            return this.tilesets['Tileset'];
         }
         // Default fallback
-        return this.tilesets['A4_Nature_Rasak'];
+        return this.tilesets['Tileset'];
     }
 
     draw(ctx) {
