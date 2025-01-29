@@ -16,7 +16,7 @@ class AStar {
         this.gridSize = 32 * params.scale; // Use tile size for grid
     }
 
-    findPath(startX, startY, endX, endY, currentRoom) {
+    findPath(startX, startY, endX, endY, currentRoom, worldObjects = []) {
         // Convert coordinates to grid positions to reduce search space
         const start = {
             x: Math.floor(startX / this.gridSize),
@@ -76,7 +76,7 @@ class AStar {
             closedSet.add(current);
 
             // Check neighbors (8 directions)
-            const neighbors = this.getNeighbors(currentX, currentY, currentRoom);
+            const neighbors = this.getNeighbors(currentX, currentY, currentRoom, worldObjects);
             
             for (const neighbor of neighbors) {
                 const neighborKey = `${neighbor.x},${neighbor.y}`;
@@ -102,7 +102,7 @@ class AStar {
         return [{x: endX, y: endY}];
     }
 
-    getNeighbors(x, y, currentRoom) {
+    getNeighbors(x, y, currentRoom, worldObjects = []) {
         const neighbors = [];
         const directions = [
             {x: -1, y: 0}, {x: 1, y: 0}, {x: 0, y: -1}, {x: 0, y: 1},
@@ -125,8 +125,21 @@ class AStar {
                 this.gridSize / 2
             );
 
-            // Only add neighbor if it's not colliding with a wall
-            if (!this.worldManager.isCollidingWithWall(testBox)) {
+            // Check collision with walls and world objects
+            let hasCollision = this.worldManager.isCollidingWithWall(testBox);
+            
+            // Check collision with world objects
+            if (!hasCollision) {
+                for (const obj of worldObjects) {
+                    if (obj.isCollidingWith(testBox)) {
+                        hasCollision = true;
+                        break;
+                    }
+                }
+            }
+
+            // Only add neighbor if it's not colliding with anything
+            if (!hasCollision) {
                 neighbors.push({x: newX, y: newY});
             }
         }
@@ -151,7 +164,7 @@ class AStar {
         return path;
     }
 
-    isPathClear(start, end) {
+    isPathClear(start, end, worldObjects = []) {
         // Check a few points along the direct path
         const steps = 3; // Reduced number of checks
         for (let i = 1; i < steps; i++) {
@@ -166,8 +179,16 @@ class AStar {
                 this.gridSize / 2
             );
 
+            // Check wall collisions
             if (this.worldManager.isCollidingWithWall(testBox)) {
                 return false;
+            }
+
+            // Check world object collisions
+            for (const obj of worldObjects) {
+                if (obj.isCollidingWith(testBox)) {
+                    return false;
+                }
             }
         }
         return true;

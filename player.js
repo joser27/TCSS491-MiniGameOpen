@@ -160,8 +160,8 @@ class Player extends SpriteCharacter {
         this.currentAnimation.drawFrame(
             this.gameController.gameEngine.clockTick,
             ctx,
-            (this.x-8) - this.gameController.gameStates.playing.camera.x,
-            (this.y-48) - this.gameController.gameStates.playing.camera.y
+            (this.x-this.drawXOffset) - this.gameController.gameStates.playing.camera.x,
+            (this.y-this.drawYOffset) - this.gameController.gameStates.playing.camera.y
         );
 
         // Debug: draw bounding box and info

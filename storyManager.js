@@ -19,9 +19,10 @@ class StoryManager {
     }
 
     update() {
+
+
         if (this.currentEvent) {
             this.currentEvent.update();
-            
         }
     }
 

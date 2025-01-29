@@ -129,10 +129,10 @@ class PlayingState extends GameState {
         // this.storyManager.update();
         
 
-        // if (!this.storyManager.flags.hasSplitUp && 
-        //     this.worldManager.getCurrentRoom(this.player) === "foyer_floor1") {
-        //     this.storyManager.triggerEvent('splitUpSequence');
-        // }
+        if (!this.storyManager.flags.hasSplitUp && 
+            this.worldManager.getCurrentRoom(this.player) === "foyer_floor1") {
+            this.storyManager.triggerEvent('splitUpSequence');
+        }
 
         // // checking for trigger conditions; rat
         // if (!this.storyManager.flags.hasSeenFirstRat && 

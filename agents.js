@@ -39,7 +39,8 @@ class Agent {
 class SpriteCharacter extends Agent {
     constructor(gameController, x, y, width, height, spriteConfig) {
         super(gameController, x, y, width, height);
-        
+        this.drawXOffset = 28;
+        this.drawYOffset = 55;
         // Create animators for all directions and states
         this.animations = {
             walkRight: new Animator(
@@ -138,8 +139,8 @@ class SpriteCharacter extends Agent {
         this.currentAnimation.drawFrame(
             this.gameController.gameEngine.clockTick,
             ctx,
-            (this.x-8) - this.gameController.gameStates.playing.camera.x,
-            (this.y-48) - this.gameController.gameStates.playing.camera.y
+            (this.x-this.drawXOffset) - this.gameController.gameStates.playing.camera.x,
+            (this.y-this.drawYOffset) - this.gameController.gameStates.playing.camera.y
         );
 
         // Debug: draw bounding box
@@ -176,7 +177,7 @@ class Mike extends SpriteCharacter {
                 WIDTH: 576 / 12,
                 HEIGHT: 384 / 8
             },
-            SCALE: 2,
+            SCALE: 1.5,
             FRAME_DURATION: 0.15,
             ANIMATION: {
                 ROWS: {
@@ -214,7 +215,7 @@ class Jake extends SpriteCharacter {
                 WIDTH: 576 / 12,
                 HEIGHT: 384 / 8
             },
-            SCALE: 2,
+            SCALE: 1.5,
             FRAME_DURATION: 0.15,
             ANIMATION: {
                 ROWS: {
@@ -361,7 +362,8 @@ class Jake extends SpriteCharacter {
                     this.y,
                     player.x,
                     player.y,
-                    this.gameController.gameStates.playing.worldManager.getCurrentRoom(this)
+                    this.gameController.gameStates.playing.worldManager.getCurrentRoom(this),
+                    this.gameController.gameStates.playing.worldManager.worldObjects
                 );
 
                 if (newPath && newPath.length > 0 && newPath.length < 100) {
@@ -443,8 +445,8 @@ class Jake extends SpriteCharacter {
             this.currentAnimation.drawFrame(
                 this.gameController.gameEngine.clockTick,
                 ctx,
-                (this.x-8) - this.gameController.gameStates.playing.camera.x,
-                (this.y-48) - this.gameController.gameStates.playing.camera.y
+                (this.x-this.drawXOffset) - this.gameController.gameStates.playing.camera.x,
+                (this.y-this.drawYOffset) - this.gameController.gameStates.playing.camera.y
             );
 
             // Debug information
@@ -517,7 +519,7 @@ class Lily extends SpriteCharacter {
                 WIDTH: 576 / 12,
                 HEIGHT: 384 / 8
             },
-            SCALE: 2,
+            SCALE: 1.5,
             FRAME_DURATION: 0.15,
             ANIMATION: {
                 ROWS: {

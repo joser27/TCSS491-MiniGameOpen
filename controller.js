@@ -40,12 +40,14 @@ class Controller {
     }
 
     draw(ctx) {
-        //this.drawGrid(ctx);
+        console.log("draw");
+        this.drawGrid(ctx);
     }
 
     drawGrid(ctx) {
         const gridCheckbox = document.getElementById('grid');
         if (!gridCheckbox.checked) return;
+
 
         const canvasWidth = ctx.canvas.width;
         const canvasHeight = ctx.canvas.height;
@@ -55,7 +57,7 @@ class Controller {
         const camera = this.gameState.camera;
         
         // Set up grid style
-        ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+        ctx.strokeStyle = 'rgb(255, 255, 255)';
         ctx.lineWidth = 1;
         
         // Calculate world coordinates of the top-left corner of the screen
