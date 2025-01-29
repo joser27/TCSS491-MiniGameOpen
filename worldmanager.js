@@ -206,24 +206,24 @@ class WorldManager {
     loadMaps() {
         // Load all maps
         this.maps = {
-            outside: ASSET_MANAGER.getAsset("./assets/tmj/outside.tmj"),
+            outside: ASSET_MANAGER.getAsset("./assets/tmj/outside2.tmj"),
             foyer_floor1: ASSET_MANAGER.getAsset("./assets/tmj/foyer_floor1.tmj")
         };
         
         // Define tilesets
         this.tilesets = {
-            'A4_Nature_Rasak': {
-                image: ASSET_MANAGER.getAsset("./assets/images/A4_Nature_Rasak.png"),
+            'pixellands': {
+                image: ASSET_MANAGER.getAsset("./assets/images/pixellands.png"),
                 firstgid: 1,
-                tileWidth: 16,
-                tileHeight: 16,
-                cols: 48
+                tileWidth: 32,
+                tileHeight: 32,
+                cols: 32
             },
             'Tileset': {
                 image: ASSET_MANAGER.getAsset("./assets/images/Tileset.png"),
                 firstgid: 1,
-                tileWidth: 16,
-                tileHeight: 16,
+                tileWidth: 32,
+                tileHeight: 32,
                 cols: 20
             }
         };
@@ -567,7 +567,7 @@ class WorldManager {
     getTileset(mapName, tileId) {
         // Return appropriate tileset based on map name
         if (mapName === 'outside') {
-            return this.tilesets['A4_Nature_Rasak'];
+            return this.tilesets['pixellands'];
         } else if (mapName === 'foyer_floor1') {
             return this.tilesets['Tileset'];
         }

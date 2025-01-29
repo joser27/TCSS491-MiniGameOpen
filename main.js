@@ -3,7 +3,7 @@ const gameEngine = new GameEngine();
 const ASSET_MANAGER = new AssetManager();
 
 //TMJ
-ASSET_MANAGER.queueDownload("./assets/tmj/outside.tmj");
+ASSET_MANAGER.queueDownload("./assets/tmj/outside2.tmj");
 ASSET_MANAGER.queueDownload("./assets/tmj/foyer_floor1.tmj");
 // ASSET_MANAGER.queueDownload("./assets/tmj/bathroom.tmj");
 // ASSET_MANAGER.queueDownload("./assets/tmj/foyer.tmj");
@@ -19,8 +19,7 @@ ASSET_MANAGER.queueDownload("./assets/tmj/foyer_floor1.tmj");
 
 //PNG
 ASSET_MANAGER.queueDownload("./assets/images/characters2.png");
-ASSET_MANAGER.queueDownload("./assets/images/A4_Nature_Rasak.png");
-ASSET_MANAGER.queueDownload("./assets/images/Tileset_Building_Rasak.png");
+ASSET_MANAGER.queueDownload("./assets/images/pixellands.png");
 ASSET_MANAGER.queueDownload("./assets/images/Tileset.png");
 // ASSET_MANAGER.queueDownload("./assets/art/Interiors_32x32.png");
 // ASSET_MANAGER.queueDownload("./assets/art/Room_Builder_32x32.png");
