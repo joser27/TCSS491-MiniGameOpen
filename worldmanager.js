@@ -12,15 +12,14 @@ class WorldManager {
 
         // Define map positions (in grid coordinates)
         this.mapPositions = {
-            dining_room: { x: -50, y: 0 },
-            bathroom: { x: 0, y: 0 },
+            dining_room: { x: -50, y: 100 },
+            bathroom: { x: -150, y: 0 },
             foyer_floor2: { x: 50, y: 0 },
             study: { x: 100, y: 0 },
             foyer_floor1: { x: 150, y: 0 },
             kitchen: { x: 200, y: 0 },
-            living_room: { x: 250, y: 0 },
-            bedroom2: { x: 300, y: 0 },
-            bedroom1: { x: 350, y: 0 },
+            bedroom2: { x: 300, y: 100 },
+            bedroom1: { x: 300, y: 0 },
             outside: { x: 400, y: 0 },
             basement: { x: 500, y: 0 }
         };
@@ -65,22 +64,16 @@ class WorldManager {
                 32 * params.tileSize * params.scale,
                 32 * params.tileSize * params.scale
             ),
-            living_room: new BoundingBox(
-                this.mapPositions.living_room.x * params.tileSize * params.scale,
-                this.mapPositions.living_room.y * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale
-            ),
             bedroom2: new BoundingBox(
                 this.mapPositions.bedroom2.x * params.tileSize * params.scale,
                 this.mapPositions.bedroom2.y * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale,
+                64 * params.tileSize * params.scale,
                 32 * params.tileSize * params.scale
             ),
             bedroom1: new BoundingBox(
                 this.mapPositions.bedroom1.x * params.tileSize * params.scale,
                 this.mapPositions.bedroom1.y * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale,
+                64 * params.tileSize * params.scale,
                 32 * params.tileSize * params.scale
             ),
             outside: new BoundingBox(
@@ -92,7 +85,7 @@ class WorldManager {
             dining_room: new BoundingBox(
                 this.mapPositions.dining_room.x * params.tileSize * params.scale,
                 this.mapPositions.dining_room.y * params.tileSize * params.scale,
-                32 * params.tileSize * params.scale,
+                96 * params.tileSize * params.scale,
                 32 * params.tileSize * params.scale
             ),
             basement: new BoundingBox(
@@ -279,7 +272,6 @@ class WorldManager {
             bedroom1: ASSET_MANAGER.getAsset("./assets/tmj/bedroom1.tmj"),
             dining_room: ASSET_MANAGER.getAsset("./assets/tmj/dining_room.tmj"),
             basement: ASSET_MANAGER.getAsset("./assets/tmj/basement.tmj"),
-            living_room: ASSET_MANAGER.getAsset("./assets/tmj/living_room.tmj"),
         };
         
         // Define tilesets
@@ -306,16 +298,16 @@ class WorldManager {
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            15 * params.tileSize * params.scale, 
+            -120 * params.tileSize * params.scale, 
             5 * params.tileSize * params.scale,   
             params.tileSize * params.scale,    // width
             params.tileSize * 2 * params.scale, // height
             // Destination
-            51 * params.tileSize * params.scale,  
-            3 * params.tileSize * params.scale   
+            52 * params.tileSize * params.scale,  
+            4* params.tileSize * params.scale   
         ));
 
-        // Door from foyer to bathroom
+        // Door from foyer floor 2 to bathroom
         this.doors.push(new Door(
             this.gameController,
             // Door position
@@ -324,88 +316,88 @@ class WorldManager {
             params.tileSize * params.scale,
             params.tileSize * 2 * params.scale,
             // Destination
-            14 * params.tileSize * params.scale,
+            -120 * params.tileSize * params.scale,
             5 * params.tileSize * params.scale
         ));
 
-        // Door from foyer to starting room
+        // Door from foyer floor 2 to bedroom 2
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            55 * params.tileSize * params.scale,
+            60 * params.tileSize * params.scale,
             0 * params.tileSize * params.scale,
-            params.tileSize * params.scale,
-            params.tileSize * 2 * params.scale,
+            params.tileSize * 2*params.scale,
+            params.tileSize * 1 * params.scale,
             // Destination
-            319 * params.tileSize * params.scale,
-            12 * params.tileSize * params.scale
+            347 * params.tileSize * params.scale,
+            125 * params.tileSize * params.scale
         ));
 
-        // Door from foyer to bedroom 1
+        // Door from foyer floor 2 to bedroom 1
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            64 * params.tileSize * params.scale,
+            75 * params.tileSize * params.scale,
             0 * params.tileSize * params.scale,
-            params.tileSize * params.scale,
-            params.tileSize * 2 * params.scale,
+            params.tileSize * 2*params.scale,
+            params.tileSize * 1 * params.scale,
             // Destination
-            353 * params.tileSize * params.scale,
-            14 * params.tileSize * params.scale,
-            true,
+            345 * params.tileSize * params.scale,
+            24 * params.tileSize * params.scale,
+            false,
             GameItems.RUSTY_KEY
         ));
-        // Door from bedroom 1 to foyer
+        // Door from bedroom 1 to foyer floor 2
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            353 * params.tileSize * params.scale,
-            15 * params.tileSize * params.scale,
-            params.tileSize * params.scale,
+            344 * params.tileSize * params.scale,
+            25 * params.tileSize * params.scale,
+            params.tileSize * 2*params.scale,
             params.tileSize * 1 * params.scale,
             // Destination
-            64 * params.tileSize * params.scale,
-            3 * params.tileSize * params.scale
+            76 * params.tileSize * params.scale,
+            2 * params.tileSize * params.scale
         ));
 
-        // Door from starting room to foyer
+        // Door from bedroom 2 to foyer floor 2
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            319 * params.tileSize * params.scale,
-            12 * params.tileSize * params.scale,
+            346 * params.tileSize * params.scale,
+            126 * params.tileSize * params.scale,
             params.tileSize * params.scale,
             params.tileSize * 2 * params.scale,
             // Destination
-            55 * params.tileSize * params.scale,
-            3 * params.tileSize * params.scale
+            61 * params.tileSize * params.scale,
+            2 * params.tileSize * params.scale
         ));
 
-        // Door from foyer room to foyer 1
+        // Door from foyer floor 2 to foyer floor 1
         this.doors.push(new Door(
             this.gameController,
             // Door position
             53 * params.tileSize * params.scale,
             14 * params.tileSize * params.scale,
-            params.tileSize * params.scale,
+            params.tileSize * 5 * params.scale,
             params.tileSize * 1 * params.scale,
             // Destination
-            153 * params.tileSize * params.scale,
-            12 * params.tileSize * params.scale
+            155 * params.tileSize * params.scale,
+            17 * params.tileSize * params.scale
         ));
-        // Door from foyer 1 room to foyer
+        // Door from foyer floor 1 to foyer floor 2
         this.doors.push(new Door(
             this.gameController,
             // Door position
             153 * params.tileSize * params.scale,
-            9 * params.tileSize * params.scale,
-            params.tileSize * 4 * params.scale,
+            12 * params.tileSize * params.scale,
+            params.tileSize * 5 * params.scale,
             params.tileSize * 1 * params.scale,
             // Destination
-            53 * params.tileSize * params.scale,
-            12 * params.tileSize * params.scale
+            55 * params.tileSize * params.scale,
+            11 * params.tileSize * params.scale
         ));
-        // Door from foyer floor 1 room to kitchen
+        // Door from foyer floor 1 to kitchen
         this.doors.push(new Door(
             this.gameController,
             // Door position
@@ -414,106 +406,106 @@ class WorldManager {
             params.tileSize * params.scale,
             params.tileSize * 2 * params.scale,
             // Destination
-            214 * params.tileSize * params.scale,
-            20 * params.tileSize * params.scale
+            229 * params.tileSize * params.scale,
+            23 * params.tileSize * params.scale
         ));
-        // Door from kitchen room to foyer 1
+        // Door from kitchen to foyer floor 1
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            215 * params.tileSize * params.scale,
-            20 * params.tileSize * params.scale,
+            230 * params.tileSize * params.scale,
+            22 * params.tileSize * params.scale,
             params.tileSize * params.scale,
             params.tileSize * 2 * params.scale,
             // Destination
-            151 * params.tileSize * params.scale,
-            17 * params.tileSize * params.scale
+            152 * params.tileSize * params.scale,
+            23 * params.tileSize * params.scale
         ));
-        // Door from kitchen room to dining room
+        // Door from kitchen to dining room
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            212 * params.tileSize * params.scale,
-            2 * params.tileSize * params.scale,
-            params.tileSize * params.scale,
+            222 * params.tileSize * params.scale,
+            1 * params.tileSize * params.scale,
+            params.tileSize * 2 *params.scale,
             params.tileSize * 1 * params.scale,
             // Destination
-            -45 * params.tileSize * params.scale,
-            11 * params.tileSize * params.scale
+            -27 * params.tileSize * params.scale,
+            129 * params.tileSize * params.scale
         ));
 
         // Door from dining room to kitchen
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            -45 * params.tileSize * params.scale,
-            13 * params.tileSize * params.scale,
-            params.tileSize * params.scale,
-            params.tileSize * 2 * params.scale,
+            -28 * params.tileSize * params.scale,
+            130 * params.tileSize * params.scale,
+            params.tileSize * 2*params.scale,
+            params.tileSize * 1 * params.scale,
             // Destination
-            212 * params.tileSize * params.scale,
-            3 * params.tileSize * params.scale,
+            223 * params.tileSize * params.scale,
+            2 * params.tileSize * params.scale,
         ));
 
-        // Door from dining room to living room
-        this.doors.push(new Door(
-            this.gameController,
-            // Door position
-            -29 * params.tileSize * params.scale,
-            7 * params.tileSize * params.scale,
-            params.tileSize * params.scale,
-            params.tileSize * 2 * params.scale,
-            // Destination
-            252 * params.tileSize * params.scale,
-            7 * params.tileSize * params.scale
-        ));
-        // Door from living room to dining room
-        this.doors.push(new Door(
-            this.gameController,
-            // Door position
-            250 * params.tileSize * params.scale,
-            7 * params.tileSize * params.scale,
-            params.tileSize * params.scale,
-            params.tileSize * 2 * params.scale,
-            // Destination
-            -31 * params.tileSize * params.scale,
-            8 * params.tileSize * params.scale
-        ));
+        // // Door from dining room to living room
+        // this.doors.push(new Door(
+        //     this.gameController,
+        //     // Door position
+        //     -29 * params.tileSize * params.scale,
+        //     7 * params.tileSize * params.scale,
+        //     params.tileSize * params.scale,
+        //     params.tileSize * 2 * params.scale,
+        //     // Destination
+        //     252 * params.tileSize * params.scale,
+        //     7 * params.tileSize * params.scale
+        // ));
+        // // Door from living room to dining room
+        // this.doors.push(new Door(
+        //     this.gameController,
+        //     // Door position
+        //     250 * params.tileSize * params.scale,
+        //     7 * params.tileSize * params.scale,
+        //     params.tileSize * params.scale,
+        //     params.tileSize * 2 * params.scale,
+        //     // Destination
+        //     -31 * params.tileSize * params.scale,
+        //     8 * params.tileSize * params.scale
+        // ));
         // Door from living room to study
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            264 * params.tileSize * params.scale,
-            15 * params.tileSize * params.scale,
-            params.tileSize * params.scale,
+            18 * params.tileSize * params.scale,
+            130 * params.tileSize * params.scale,
+            params.tileSize * 2*params.scale,
             params.tileSize * 1 * params.scale,
             // Destination
-            106 * params.tileSize * params.scale,
-            4* params.tileSize * params.scale
+            112 * params.tileSize * params.scale,
+            2* params.tileSize * params.scale
         ));          
         // Door from study to living room
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            106 * params.tileSize * params.scale,
+            111 * params.tileSize * params.scale,
             1 * params.tileSize * params.scale,
-            params.tileSize * params.scale,
-            params.tileSize * 2 * params.scale,
+            params.tileSize * 2*params.scale,
+            params.tileSize * 1 * params.scale,
             // Destination
-            265 * params.tileSize * params.scale,
-            14 * params.tileSize * params.scale
+            19 * params.tileSize * params.scale,
+            129 * params.tileSize * params.scale
         ));     
         // Door from study to foyer 1
         this.doors.push(new Door(
             this.gameController,
             // Door position
             100 * params.tileSize * params.scale,
-            20 * params.tileSize * params.scale,
+            22 * params.tileSize * params.scale,
             params.tileSize * params.scale,
             params.tileSize * 2 * params.scale,
             // Destination
-            163 * params.tileSize * params.scale,
-            17 * params.tileSize * params.scale
+            180 * params.tileSize * params.scale,
+            23 * params.tileSize * params.scale
         ));    
         // Door from foyer floor 1 to study
         this.doors.push(new Door(
@@ -524,8 +516,8 @@ class WorldManager {
             params.tileSize * params.scale,
             params.tileSize * 2 * params.scale,
             // Destination
-            101 * params.tileSize * params.scale,
-            20 * params.tileSize * params.scale
+            102 * params.tileSize * params.scale,
+            23 * params.tileSize * params.scale
         ));    
         // Outside to foyer floor 1
         this.doors.push(new Door(
@@ -561,22 +553,22 @@ class WorldManager {
             params.tileSize *2* params.scale,
             params.tileSize * params.scale,
             // Destination
-            543 * params.tileSize * params.scale,
-            47 * params.tileSize * params.scale,
-            true,
+            556 * params.tileSize * params.scale,
+            58 * params.tileSize * params.scale,
+            false,
             GameItems.BASEMENT_KEY
         ));
         // Door from basement to foyer 1
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            543 * params.tileSize * params.scale,
-            50 * params.tileSize * params.scale,
+            555 * params.tileSize * params.scale,
+            59 * params.tileSize * params.scale,
             params.tileSize * 2 * params.scale,
             params.tileSize * 1 * params.scale,
             // Destination
-            163 * params.tileSize * params.scale,
-            15 * params.tileSize * params.scale
+            175 * params.tileSize * params.scale,
+            17 * params.tileSize * params.scale
         ));
 
         

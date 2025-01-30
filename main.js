@@ -14,7 +14,6 @@ ASSET_MANAGER.queueDownload("./assets/tmj/bedroom1.tmj");
 ASSET_MANAGER.queueDownload("./assets/tmj/outside.tmj");
 ASSET_MANAGER.queueDownload("./assets/tmj/dining_room.tmj");
 ASSET_MANAGER.queueDownload("./assets/tmj/basement.tmj");
-ASSET_MANAGER.queueDownload("./assets/tmj/living_room.tmj");
 
 //PNG
 ASSET_MANAGER.queueDownload("./assets/images/characters2.png");

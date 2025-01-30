@@ -32,7 +32,7 @@ class Player extends SpriteCharacter {
         };
         
         super(gameController, x, y, width, height, SPRITE);
-        this.speed = 3;
+        this.speed = 4;
         this.inventory = [];
         this.isPaused = false;
         this.z = 0;  
