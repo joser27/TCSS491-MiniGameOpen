@@ -66,7 +66,7 @@ class MenuState extends GameState {
         
         // Draw title
         ctx.fillStyle = 'Red';
-        ctx.fillText('Labyrinth of Fear', ctx.canvas.width / 2, 100);
+        ctx.fillText('The Experiment', ctx.canvas.width / 2, 100);
         
         // Draw menu options
         this.options.forEach((option, index) => {
