@@ -22,6 +22,7 @@ class WorldObjects {
             width: 0,
             height: 0
         };
+        this.hasFixedZIndex = false;
 
 
         this.updateBoundingBox();
@@ -43,6 +44,10 @@ class WorldObjects {
     }
 
     // Method to set custom collision adjustment
+    // - Move collision box x pixels right
+    // - Move collision box y pixels down
+    // - Shrink width by width pixels
+    // - Shrink height by height pixels
     setCollisionAdjustment(x, y, width, height) {
         this.collisionAdjustment = { x, y, width, height };
         this.updateBoundingBox();
@@ -83,7 +88,7 @@ class WorldObjects {
             }
         }
 
-        // Debug: draw bounding box
+        // Debug: draw bounding box and stats
         const debugCheckbox = document.getElementById('debug');
         if (debugCheckbox.checked) {
             // Draw sprite bounds in blue
@@ -104,6 +109,31 @@ class WorldObjects {
                 this.boundingBox.width,
                 this.boundingBox.height
             );
+
+            // Draw debug stats
+            ctx.font = '12px Arial';
+            ctx.fillStyle = 'white';
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.textAlign = 'center';
+            
+            const stats = [
+                `Z-Index: ${this.zIndex}`,
+                `Fixed Z: ${this.hasFixedZIndex}`,
+                `X: ${Math.floor(this.x)}`,
+                `Y: ${Math.floor(this.y)}`,
+                `Collision Adj: ${JSON.stringify(this.collisionAdjustment)}`
+            ];
+
+            stats.forEach((stat, index) => {
+                const x = this.x - this.camera.x + (tileSize * scale * this.tiles[0].length)/2;
+                const y = this.y - this.camera.y - 20 - (index * 15);
+                
+                // Draw text outline
+                ctx.strokeText(stat, x, y);
+                // Draw text
+                ctx.fillText(stat, x, y);
+            });
         }
     }
 
@@ -137,21 +167,65 @@ class Table extends WorldObjects {
     }
 }
 
-class ChairDown extends WorldObjects {
+class ChairUp extends WorldObjects {
     constructor(worldManager, x, y, width, height) {
         super(worldManager, x, y, width, height);
         this.tiles = [
+
             [171],  
             [191]   
         ];
 
-        this.setCollisionAdjustment(8, 16, -16, -16);
+        this.setCollisionAdjustment(8, 16, -16, -48);
+    }
+}
+class BookOpen extends WorldObjects {
+    constructor(worldManager, x, y, width, height) {
+        super(worldManager, x, y, width, height);
+        this.tiles = [
+            [106],  
+   
+        ];
+
+
+    }
+}
+class Pot23 extends WorldObjects {
+    constructor(worldManager, x, y, width, height) {
+        super(worldManager, x, y, width, height);
+        this.tiles = [
+            [23],  
+        ];
+
+        
     }
 }
 
-class Cabinet extends WorldObjects {
+class Crate extends WorldObjects {
     constructor(worldManager, x, y, width, height) {
         super(worldManager, x, y, width, height);
+        this.tiles = [
+            [107],
+            [127],
+        ];
+
+        this.setCollisionAdjustment(10, 5, -16, -38);
+    }
+}
+
+
+class Cabinet extends WorldObjects {
+    constructor(worldManager, x, y, width, height) {
+
+        super(worldManager, x, y, width, height);
+        this.tiles = [
+            [8,9,10],
+            [28,29,30],
+            [48,49,50],
+
+        ];
+
+
 
     }
 }

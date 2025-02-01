@@ -114,11 +114,37 @@ class WorldManager {
         this.initializeMapCache();
         this.loadInspectableItems();
 
-        this.chairDown = new ChairDown(this, 159*params.tileSize*params.scale, 17*params.tileSize*params.scale, 32, 32);
-        this.gameController.gameEngine.addEntity(this.chairDown);
+        // this.chairUp = new ChairUp(this, 160*params.tileSize*params.scale, 18*params.tileSize*params.scale, 32, 32);
+        // this.gameController.gameEngine.addEntity(this.chairUp);
 
 
-        this.worldObjects = [this.chairDown];
+        this.bookOpen = new BookOpen(this, 106*params.tileSize*params.scale, 10*params.tileSize*params.scale, 32, 32);
+        this.gameController.gameEngine.addEntity(this.bookOpen);
+
+
+        this.pot23 = new Pot23(this, 32*params.tileSize*params.scale, 112*params.tileSize*params.scale, 32, 32);
+        this.gameController.gameEngine.addEntity(this.pot23);
+
+        this.cabinet = new Cabinet(this, -41*params.tileSize*params.scale, 104*params.tileSize*params.scale, 32, 32);
+        this.gameController.gameEngine.addEntity(this.cabinet);
+
+        this.crate = new Crate(this, 210*params.tileSize*params.scale, 10*params.tileSize*params.scale, 32, 32);
+        this.gameController.gameEngine.addEntity(this.crate);
+
+        
+        this.crate2 = new Crate(this, -145*params.tileSize*params.scale, 15*params.tileSize*params.scale, 32, 32);
+        this.gameController.gameEngine.addEntity(this.crate2);
+
+        
+        this.crate3 = new Crate(this, 328*params.tileSize*params.scale, 8*params.tileSize*params.scale, 32, 32);
+        this.gameController.gameEngine.addEntity(this.crate3);
+
+        this.cabinet2 = new Cabinet(this, 164*params.tileSize*params.scale, 18*params.tileSize*params.scale, 32, 32);
+        this.gameController.gameEngine.addEntity(this.cabinet2);
+
+        this.worldObjects = [this.bookOpen, this.pot23, this.cabinet, this.crate, this.crate2, this.crate3, this.cabinet2, ];
+
+
 
     }
 
@@ -142,11 +168,11 @@ class WorldManager {
         );
         this.inspectableItems.addItem(ritualBook);
 
-        // Rusty Key behind Living Room painting
+        // Rusty Key in Living Room
         const livingRoomPainting = new InspectableItem(
             this.gameController,
-            255*params.tileSize*params.scale, 
-            5*params.tileSize*params.scale,
+            32*params.tileSize*params.scale, 
+            112*params.tileSize*params.scale,
             32, 32,
             () => {
                 if (!this.gameController.gameStates.playing.player.hasItem(GameItems.RITUAL_BOOK)) {
@@ -165,7 +191,7 @@ class WorldManager {
         // Talisman in Bathroom
         const bathroomSink = new InspectableItem(
             this.gameController,
-            10*params.tileSize*params.scale, 
+            -145*params.tileSize*params.scale, 
             15*params.tileSize*params.scale,
             32, 32,
             () => {
@@ -187,7 +213,7 @@ class WorldManager {
         const diningRoomPainting = new InspectableItem(
             this.gameController,
             -40*params.tileSize*params.scale, 
-            5*params.tileSize*params.scale,
+            106*params.tileSize*params.scale,
             32, 32,
             () => {
                 if (!this.gameController.gameStates.playing.player.hasItem(GameItems.TALISMAN)) {
@@ -206,8 +232,8 @@ class WorldManager {
         // Secret Room Key in Bedroom 2
         const bedroom2Wall = new InspectableItem(
             this.gameController,
-            360*params.tileSize*params.scale, 
-            15*params.tileSize*params.scale,
+            328*params.tileSize*params.scale, 
+            8*params.tileSize*params.scale,
             32, 32,
             () => {
                 if (!this.gameController.gameStates.playing.player.hasItem(GameItems.RITUAL_DAGGER)) {
@@ -344,10 +370,11 @@ class WorldManager {
             // Destination
             345 * params.tileSize * params.scale,
             24 * params.tileSize * params.scale,
-            false,
+            true,
             GameItems.RUSTY_KEY
         ));
         // Door from bedroom 1 to foyer floor 2
+
         this.doors.push(new Door(
             this.gameController,
             // Door position
@@ -555,10 +582,11 @@ class WorldManager {
             // Destination
             556 * params.tileSize * params.scale,
             58 * params.tileSize * params.scale,
-            false,
+            true,
             GameItems.BASEMENT_KEY
         ));
         // Door from basement to foyer 1
+
         this.doors.push(new Door(
             this.gameController,
             // Door position

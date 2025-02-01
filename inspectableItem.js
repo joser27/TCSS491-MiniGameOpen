@@ -58,14 +58,7 @@ class InspectableItem {
     }
 
     draw(ctx) {
-        // Draw the base item
-        ctx.fillStyle = "rgba(0, 255, 0, 0.1)";
-        ctx.fillRect(
-            this.x - this.gameController.gameState.camera.x, 
-            this.y - this.gameController.gameState.camera.y, 
-            this.width, 
-            this.height
-        );
+
 
 
 
@@ -133,6 +126,7 @@ class InspectableItemManager {
         this.gameController = gameController;
         this.items = [];
         this.activeItem = null;
+        this.zIndex = 5000;
     }
 
     addItem(item) {
