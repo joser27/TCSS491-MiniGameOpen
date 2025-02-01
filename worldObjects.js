@@ -7,13 +7,14 @@ class WorldObjects {
         this.height = height;
         this.zIndex = 200;
         this.camera = this.worldManager.gameController.gameStates.playing.camera;
-        this.tileset = ASSET_MANAGER.getAsset('./assets/art/Interiors_32x32.png');
+        this.tileset = ASSET_MANAGER.getAsset('./assets/images/Props.png');
         this.tilesetParams = {
-            frames: { cols: 16, rows: 1064 },
-            dimension: { width: 512, height: 34048 }
+            frames: { cols: 20, rows: 20 },
+            dimension: { width: 320, height: 320 }
         };
         this.tiles = []; 
         
+
         // Default collision
         this.collisionAdjustment = {
             x: 0,
@@ -136,12 +137,12 @@ class Table extends WorldObjects {
     }
 }
 
-class Chair extends WorldObjects {
+class ChairDown extends WorldObjects {
     constructor(worldManager, x, y, width, height) {
         super(worldManager, x, y, width, height);
         this.tiles = [
-            [4327],  
-            [4342]   
+            [171],  
+            [191]   
         ];
 
         this.setCollisionAdjustment(8, 16, -16, -16);

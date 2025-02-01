@@ -112,16 +112,16 @@ class WorldManager {
         // Initialize map cache
         this.inspectableItems = new InspectableItemManager(this.gameController);
         this.initializeMapCache();
-        // this.loadInspectableItems();
-        // // this.desk = new Desk(this, 156*params.tileSize*params.scale, 13*params.tileSize*params.scale, 32, 32);
-        // // this.gameController.gameEngine.addEntity(this.desk);
-        // // this.chair = new Chair(this, 159*params.tileSize*params.scale, 17*params.tileSize*params.scale, 32, 32);
-        // // this.gameController.gameEngine.addEntity(this.chair);
-        // // this.bookcase = new Bookcase(this, 162*params.tileSize*params.scale, 17*params.tileSize*params.scale, 32, 32);
-        // // this.gameController.gameEngine.addEntity(this.bookcase);
+        this.loadInspectableItems();
 
-        this.worldObjects = [];
+        this.chairDown = new ChairDown(this, 159*params.tileSize*params.scale, 17*params.tileSize*params.scale, 32, 32);
+        this.gameController.gameEngine.addEntity(this.chairDown);
+
+
+        this.worldObjects = [this.chairDown];
+
     }
+
 
     loadInspectableItems() {
         // Ritual Book in Study
@@ -383,7 +383,7 @@ class WorldManager {
             params.tileSize * 1 * params.scale,
             // Destination
             155 * params.tileSize * params.scale,
-            17 * params.tileSize * params.scale
+            14 * params.tileSize * params.scale
         ));
         // Door from foyer floor 1 to foyer floor 2
         this.doors.push(new Door(

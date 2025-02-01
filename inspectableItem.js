@@ -20,7 +20,7 @@ class InspectableItem {
             width + 40,
             height + 40
         );
-        this.zIndex = 500;
+        this.zIndex = 5000;
         this.hasFixedZIndex = true;
     }
 

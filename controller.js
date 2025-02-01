@@ -35,12 +35,10 @@ class Controller {
     }
 
     update() {
-        // console.log(this.gameState)
         
     }
 
     draw(ctx) {
-        console.log("draw");
         this.drawGrid(ctx);
     }
 

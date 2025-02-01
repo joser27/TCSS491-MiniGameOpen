@@ -6,10 +6,10 @@ class InventoryState extends GameState {
         this.player = previousState.player;
         this.camera = previousState.camera;
         this.removeFromWorld = false;
+        this.zIndex = 5000;
     }
 
     update() {
-        
         if (this.gameController.gameEngine.consumeKeyPress('i')) {
             console.log("inventory closed")
             this.player.isPaused = false;

@@ -4,8 +4,8 @@ class PlayingState extends GameState {
 
         this.player = new Player(
             this.gameController, 
-            (172 * params.tileSize) * params.scale,  //430
-            (19 * params.tileSize) * params.scale,   //42
+            (430 * params.tileSize) * params.scale,  //430
+            (42 * params.tileSize) * params.scale,   //42
             params.tileSize, 
             params.tileSize
         );
@@ -74,7 +74,7 @@ class PlayingState extends GameState {
 
         this.storyManager.zIndex = 5000;
 
-        //this.storyManager.triggerEvent('gameIntro');
+        this.storyManager.triggerEvent('gameIntro');
     }
     pauseEntities() {
         this.jake.isPaused = true;
@@ -116,10 +116,10 @@ class PlayingState extends GameState {
 
         
 
-        // if (!this.storyManager.flags.hasSplitUp && 
-        //     this.worldManager.getCurrentRoom(this.player) === "foyer_floor1") {
-        //     this.storyManager.triggerEvent('splitUpSequence');
-        // }
+        if (!this.storyManager.flags.hasSplitUp && 
+            this.worldManager.getCurrentRoom(this.player) === "foyer_floor1") {
+            this.storyManager.triggerEvent('splitUpSequence');
+        }
 
         // // checking for trigger conditions; rat
         // if (!this.storyManager.flags.hasSeenFirstRat && 

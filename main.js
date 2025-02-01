@@ -19,6 +19,7 @@ ASSET_MANAGER.queueDownload("./assets/tmj/basement.tmj");
 ASSET_MANAGER.queueDownload("./assets/images/characters2.png");
 ASSET_MANAGER.queueDownload("./assets/images/pixellands.png");
 ASSET_MANAGER.queueDownload("./assets/images/Tileset.png");
+ASSET_MANAGER.queueDownload("./assets/images/Props.png");
 // ASSET_MANAGER.queueDownload("./assets/art/Interiors_32x32.png");
 // ASSET_MANAGER.queueDownload("./assets/art/Room_Builder_32x32.png");
 // ASSET_MANAGER.queueDownload("./assets/art/Premade_Character_04.png");
@@ -39,6 +40,8 @@ ASSET_MANAGER.queueDownload("./assets/audio/mixkit-creaky-door-open-195.wav");
 ASSET_MANAGER.queueDownload("./assets/audio/night-cricket-ambience-22484.mp3");
 ASSET_MANAGER.queueDownload("./assets/audio/Locked Door Sound Effect.wav");
 
+//TTF
+ASSET_MANAGER.queueDownload("./assets/fonts/I Still Know.ttf");
 
 
 

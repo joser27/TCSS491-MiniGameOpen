@@ -92,6 +92,7 @@ class GameEngine {
     };
 
     draw() {
+        //console.log(this.entities);
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
         let sortedEntities = [...this.entities].sort((a, b) => {

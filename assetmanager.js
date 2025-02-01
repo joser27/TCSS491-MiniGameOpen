@@ -21,8 +21,23 @@ class AssetManager {
             const path = this.downloadQueue[i];
             console.log(path);
 
-            // Check if the file is an audio file
-            if (path.endsWith('.wav') || path.endsWith('.mp3')) {
+            if (path.endsWith('.ttf')) {
+                // Handle TTF font files
+                const fontName = path.split('/').pop().split('.')[0]; 
+                const fontFace = new FontFace(fontName, `url(${path})`);
+                
+                fontFace.load().then((loadedFace) => {
+                    document.fonts.add(loadedFace);
+                    this.cache[path] = fontName; 
+                    console.log("Loaded " + path);
+                    this.successCount++;
+                    if (this.isDone()) callback();
+                }).catch((error) => {
+                    console.log("Error loading " + path);
+                    this.errorCount++;
+                    if (this.isDone()) callback();
+                });
+            } else if (path.endsWith('.wav') || path.endsWith('.mp3')) {
                 const audio = new Audio();
                 audio.addEventListener("loadeddata", () => {
                     console.log("Loaded " + audio.src);
@@ -85,5 +100,10 @@ class AssetManager {
             asset.volume = Math.max(0, Math.min(1, volume)); // Clamp volume between 0 and 1
         }
     };
+
+    // New method to check if a font is loaded
+    isFontLoaded(fontName) {
+        return document.fonts.check(`12px ${fontName}`);
+    }
 };
 

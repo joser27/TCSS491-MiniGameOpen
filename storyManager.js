@@ -241,9 +241,13 @@ class CutsceneEvent {
 
     draw(ctx) {
         if (this.currentLine < this.dialogueLines.length) {
+            // Draw semi-transparent black background
             ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
             ctx.fillRect(50, 350, 900, 150); 
 
+            // Reset text alignment for dialog
+            ctx.textAlign = 'left';
+            
             ctx.fillStyle = 'white';
             ctx.font = '24px Arial'; 
             
