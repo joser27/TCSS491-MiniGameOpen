@@ -92,20 +92,21 @@ class GameEngine {
     };
 
     draw() {
-        //console.log(this.entities);
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
         let sortedEntities = [...this.entities].sort((a, b) => {
-            // If either entity has a fixed z-index, use that for comparison
-            if (a.hasFixedZIndex || b.hasFixedZIndex) {
-                return (a.zIndex || 0) - (b.zIndex || 0);
+            // Get base layer from z-index (default to 0 if not set)
+            const aZ = a.zIndex || 0;
+            const bZ = b.zIndex || 0;
+            
+            // If z-indices are different, use that
+            if (aZ !== bZ) {
+                return aZ - bZ;
             }
             
-            // Get the y position from bounding boxes for comparison
+            // If same z-index, sort by y-position
             const aY = a.boundingBox ? a.boundingBox.y : (a.y || 0);
             const bY = b.boundingBox ? b.boundingBox.y : (b.y || 0);
-            
-            // Sort based on the y position of the bounding boxes
             return aY - bY;
         });
 
@@ -118,12 +119,17 @@ class GameEngine {
     };
 
     drawFPS(ctx) {
-        this.ctx.fillStyle = "white";
-        this.ctx.strokeStyle = "black";
-        this.ctx.font = "bold 16px Arial";
-        this.ctx.lineWidth = 4;
-        this.ctx.strokeText("FPS: " + this.timer.fps, 10, 30);
-        this.ctx.fillText("FPS: " + this.timer.fps, 10, 30);
+        const debugCheckbox = document.getElementById('debug');
+        if (debugCheckbox.checked) {
+            this.ctx.fillStyle = "white";
+            this.ctx.strokeStyle = "black";
+            this.ctx.font = "bold 16px Arial";
+            this.ctx.lineWidth = 4;
+
+            this.ctx.strokeText("FPS: " + this.timer.fps, 10, 30);
+            this.ctx.fillText("FPS: " + this.timer.fps, 10, 30);
+        }
+
     }
 
     update() {

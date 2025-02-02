@@ -6,6 +6,7 @@ class InventoryState extends GameState {
         this.player = previousState.player;
         this.camera = previousState.camera;
         this.removeFromWorld = false;
+        this.hasFixedZIndex = true;
         this.zIndex = 5000;
     }
 

@@ -22,7 +22,7 @@ class WorldObjects {
             width: 0,
             height: 0
         };
-        this.hasFixedZIndex = false;
+        this.hasFixedZIndex = true;
 
 
         this.updateBoundingBox();

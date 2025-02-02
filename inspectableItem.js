@@ -61,11 +61,13 @@ class InspectableItem {
 
 
 
-
+        
         // Draw dialog box if showing
         if (this.showingDialog) {
             this.drawDialogBox(ctx);
         }
+
+
 
         // Debug: draw interaction box
         const debugCheckbox = document.getElementById('debug');
@@ -93,11 +95,14 @@ class InspectableItem {
     }
 
     drawDialogBox(ctx) {
-        // Calculate dialog box position (above the item)
-        const padding = 10;
-        const boxHeight = 40;
-        const boxWidth = ctx.measureText(this.dialogText).width + padding * 2;
+        const padding = 20;  
+        const boxHeight = 60; 
         
+  
+        ctx.font = '16px Arial';
+        const boxWidth = ctx.measureText(this.dialogText).width + padding * 4;
+        
+
         const boxX = this.x - this.gameController.gameState.camera.x - (boxWidth - this.width) / 2;
         const boxY = this.y - this.gameController.gameState.camera.y - boxHeight - padding;
 
@@ -110,12 +115,15 @@ class InspectableItem {
         ctx.lineWidth = 2;
         ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
 
-        // Draw text
+        // Set text properties
         ctx.fillStyle = 'white';
         ctx.font = '16px Arial';
+        ctx.textAlign = 'center';
+
+        // Draw text at center of box
         ctx.fillText(
             this.dialogText,
-            boxX + padding,
+            boxX + boxWidth/2,
             boxY + boxHeight/2 + 5
         );
     }
@@ -160,9 +168,10 @@ class InspectableItemManager {
     }
 
     draw(ctx) {
-        this.items.forEach(item => {
+            this.items.forEach(item => {
             item.draw(ctx);
             if (item.highlight) {
+
                 // Draw interaction prompt
                 ctx.fillStyle = "white";
                 ctx.font = "12px Arial";

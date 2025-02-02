@@ -152,11 +152,10 @@ class HowToPlayState extends GameState {
         // Draw instructions
         ctx.font = '24px "I Still Know"';
         ctx.fillStyle = 'White';
-        ctx.fillText('Use WASD or Arrow Keys to move', ctx.canvas.width / 2, 200);
-        ctx.fillText('Press E to interact with objects and items', ctx.canvas.width / 2, 250);
-        ctx.fillText('Search the mansion for clues and items', ctx.canvas.width / 2, 300);
-        ctx.fillText('Find a way to survive the night...', ctx.canvas.width / 2, 350);
-        ctx.fillText('And discover the truth about Mr. Harrison', ctx.canvas.width / 2, 400);
+        ctx.fillText('Movement: WASD', ctx.canvas.width / 2, 200);
+        ctx.fillText('Interact: E', ctx.canvas.width / 2, 250);
+        ctx.fillText('Inventory: I', ctx.canvas.width / 2, 300);
+        ctx.fillText('Find items and escape the mansion...', ctx.canvas.width / 2, 370);
         
         // Draw return instruction
         ctx.fillStyle = 'Gray';
