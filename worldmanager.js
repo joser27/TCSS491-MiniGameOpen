@@ -96,7 +96,7 @@ class WorldManager {
             )
         };
 
-        this.COLLISION_TILE_ID = 1465; // Update if this is different for your tileset
+        this.COLLISION_TILE_ID = 986; // Update if this is different for your tileset
         this.collisionMap = {}; // store collision data for each room
         this.loadCollisionData();
 
