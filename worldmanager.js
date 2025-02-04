@@ -96,7 +96,7 @@ class WorldManager {
             )
         };
 
-        this.COLLISION_TILE_ID = 986; // Update if this is different for your tileset
+        this.COLLISION_TILE_ID = 986;
         this.collisionMap = {}; // store collision data for each room
         this.loadCollisionData();
 
@@ -767,7 +767,7 @@ class WorldManager {
             // Store collision tile positions as BoundingBoxes
             const width = collisionLayer.width;
             collisionLayer.data.forEach((tileId, index) => {
-                if (tileId === this.COLLISION_TILE_ID) {
+                if (tileId === this.COLLISION_TILE_ID || tileId === 1386) {
                     const x = index % width;
                     const y = Math.floor(index / width);
                     
