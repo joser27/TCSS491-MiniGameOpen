@@ -14,16 +14,21 @@ ASSET_MANAGER.queueDownload("./assets/tmj/bedroom1.tmj");
 ASSET_MANAGER.queueDownload("./assets/tmj/outside.tmj");
 ASSET_MANAGER.queueDownload("./assets/tmj/dining_room.tmj");
 ASSET_MANAGER.queueDownload("./assets/tmj/basement.tmj");
+ASSET_MANAGER.queueDownload("./assets/tmj/attic.tmj");
+ASSET_MANAGER.queueDownload("./assets/tmj/hiddenHallway.tmj");
 
 //PNG
 ASSET_MANAGER.queueDownload("./assets/images/characters2.png");
 ASSET_MANAGER.queueDownload("./assets/images/pixellands.png");
 ASSET_MANAGER.queueDownload("./assets/images/Tileset.png");
 ASSET_MANAGER.queueDownload("./assets/images/Props.png");
+ASSET_MANAGER.queueDownload("./assets/images/monster-spider.png");
 // ASSET_MANAGER.queueDownload("./assets/art/Interiors_32x32.png");
 // ASSET_MANAGER.queueDownload("./assets/art/Room_Builder_32x32.png");
 // ASSET_MANAGER.queueDownload("./assets/art/Premade_Character_04.png");
-// ASSET_MANAGER.queueDownload("./assets/art/rat.png");
+ASSET_MANAGER.queueDownload("./assets/images/rat.png");
+ASSET_MANAGER.queueDownload("./assets/images/monster-spider-behavior-male.png");
+ASSET_MANAGER.queueDownload("./assets/images/spidereggs.png");
 // ASSET_MANAGER.queueDownload("./assets/art/minator.png");
 // ASSET_MANAGER.queueDownload("./assets/art/17_Garden_32x32.png");
 // ASSET_MANAGER.queueDownload("./assets/art/19_Graveyard_32x32.png");

@@ -1,5 +1,5 @@
 class WorldObjects {
-    constructor(worldManager, x, y, width, height) {
+    constructor(worldManager, x, y, width, height, spritesheetKey = 'props') {
         this.worldManager = worldManager;
         this.x = x;
         this.y = y;
@@ -7,11 +7,30 @@ class WorldObjects {
         this.height = height;
         this.zIndex = 200;
         this.camera = this.worldManager.gameController.gameStates.playing.camera;
-        this.tileset = ASSET_MANAGER.getAsset('./assets/images/Props.png');
-        this.tilesetParams = {
-            frames: { cols: 20, rows: 20 },
-            dimension: { width: 320, height: 320 }
+
+        // Replace the direct tileset assignments with a spritesheet mapping
+        const SPRITESHEETS = {
+            'props': {
+                tileset: ASSET_MANAGER.getAsset('./assets/images/Props.png'),
+                params: {
+                    frames: { cols: 20, rows: 20 },
+                    dimension: { width: 320, height: 320 }
+                }
+            },
+            'webs': {
+                tileset: ASSET_MANAGER.getAsset('./assets/images/spidereggs.png'),
+                params: {
+                    frames: { cols: 4, rows: 10 },
+                    dimension: { width: 128, height: 160 }
+                }
+            }
         };
+
+        // Set the tileset based on the provided key
+        const selectedSheet = SPRITESHEETS[spritesheetKey];
+        this.tileset = selectedSheet.tileset;
+        this.tilesetParams = selectedSheet.params;
+
         this.tiles = []; 
         
 
@@ -146,24 +165,149 @@ class WorldObjects {
     }
 }
 
-class Dresser extends WorldObjects {
+class nestEgg extends WorldObjects {
     constructor(worldManager, x, y, width, height) {
-        super(worldManager, x, y, width, height);
-
+        super(worldManager, x, y, width, height, 'webs');
+        this.tiles = [
+            [16],
+            [20],
+        ];
+        this.zIndex = 500;
+    }
+}
+class nestEgg2 extends WorldObjects {
+    constructor(worldManager, x, y, width, height) {
+        super(worldManager, x, y, width, height, 'webs');
+        this.tiles = [
+            [24],
+            [28],
+        ];
+        this.zIndex = 500;
     }
 }
 
-class Bed extends WorldObjects {
+class smallWeb extends WorldObjects {
     constructor(worldManager, x, y, width, height) {
-        super(worldManager, x, y, width, height);
+        super(worldManager, x, y, width, height, 'webs');
+        this.tiles = [
+            [19],
+            [23],
+
+        ];
+        this.zIndex = 500;
+    }
+}
+class smallWebEgg extends WorldObjects {
+
+    constructor(worldManager, x, y, width, height) {
+        super(worldManager, x, y, width, height, 'webs');
+        this.tiles = [
+            [19],
+            [23],
+        ];
+        this.zIndex = 500;
+    }
+}
+
+class smallWebEgg2 extends WorldObjects {
+    constructor(worldManager, x, y, width, height) {
+        super(worldManager, x, y, width, height, 'webs');
+        this.tiles = [
+            [27],
+            [31],
+        ];
+        this.zIndex = 500;
+    }
+}
+
+class smallWebEgg3 extends WorldObjects {
+    constructor(worldManager, x, y, width, height) {
+        super(worldManager, x, y, width, height, 'webs');
+        this.tiles = [
+            [35],
+            [39],
+        ];
+        this.zIndex = 500;
 
     }
 }
+class mediumWeb extends WorldObjects {
+    constructor(worldManager, x, y, width, height) {
+        super(worldManager, x, y, width, height, 'webs');
+        this.tiles = [
+            [17,18],
+            [21,22],
+        ];
+        this.zIndex = 500;
+    }
+}
+
+class largeWebEgg extends WorldObjects {
+    constructor(worldManager, x, y, width, height) {
+        super(worldManager, x, y, width, height, 'webs');
+        this.tiles = [
+            [25,26],
+            [29,30],
+            [33,34],
+            [37,38],
+        ];
+        this.zIndex = 500;
+    }
+}
+class largeWeb extends WorldObjects {
+    constructor(worldManager, x, y, width, height) {
+        super(worldManager, x, y, width, height, 'webs');
+        this.tiles = [
+            [0,1],
+            [4,5],
+            [8,9],
+        ];
+        this.zIndex = 500;
+    }
+}
+
+class largeWeb2 extends WorldObjects {
+    constructor(worldManager, x, y, width, height) {
+        super(worldManager, x, y, width, height, 'webs');
+        this.tiles = [
+            [2,3],
+            [6,7],
+            [10,11],
+            [14,15],
+        ];
+        this.zIndex = 500;
+    }
+}
+
+
+
 
 class Table extends WorldObjects {
     constructor(worldManager, x, y, width, height) {
         super(worldManager, x, y, width, height);
+        this.tiles = [
+            [15, 16, 17],  
+            [35, 36, 37],  
+            [55, 56, 57],  
+        ];
 
+
+
+        this.setCollisionAdjustment(0, 24, 0, -48);
+    }
+}
+
+class ChairRight extends WorldObjects {
+    constructor(worldManager, x, y, width, height) {
+        super(worldManager, x, y, width, height);
+        this.tiles = [
+
+            [173],  
+            [193]   
+
+        ];
+
+        this.setCollisionAdjustment(0, 24, -8, -48);
     }
 }
 
@@ -243,17 +387,19 @@ class Desk extends WorldObjects {
     }
 }
 
-class Bookcase extends WorldObjects {
+class LargeBookcase extends WorldObjects {
     constructor(worldManager, x, y, width, height) {
         super(worldManager, x, y, width, height);
         this.tiles = [
-            [3927, 3928, 3929, 3930],  
-            [3943, 3944, 3945, 3946],  
-            [3959, 3960, 3961, 3962],
-            [3975, 3976, 3977, 3978],
+            [74, 75, 76, 77, 78, 79],  
+            [94, 95, 96, 97, 98, 99],  
+            [114, 115, 116, 117, 118, 119],
+            [134, 135, 136, 137, 138, 139],
+
         ];
 
-        this.setCollisionAdjustment(4, 70, -8, -100);
+
+        this.setCollisionAdjustment(4, 80, -8, -100);
     }
 }
 

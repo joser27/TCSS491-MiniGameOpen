@@ -8,6 +8,7 @@ class PlayingState extends GameState {
             (42 * params.tileSize) * params.scale,   //42
             params.tileSize, 
             params.tileSize
+
         );
         this.camera = new Camera(this.gameController, this.player);
         
@@ -35,14 +36,24 @@ class PlayingState extends GameState {
 
         this.rat = new Rat(
             this.gameController, 
-            (5 * params.tileSize) * params.scale,
-            (10 * params.tileSize) * params.scale, 
+            (-135 * params.tileSize) * params.scale,
+            (18 * params.tileSize) * params.scale, 
             params.tileSize, 
             params.tileSize
         );
+
+        this.spider = new Spider(
+            this.gameController, 
+            (-135 * params.tileSize) * params.scale,
+            (18 * params.tileSize) * params.scale, 
+            params.tileSize, 
+            params.tileSize
+
+        );
+
         // Set initial room
         this.rat.currentRoom = "bathroom";
-        
+        this.spider.currentRoom = "bathroom";
 
         this.outsideAmbience = ASSET_MANAGER.getAsset("./assets/audio/night-cricket-ambience-22484.mp3");
         
@@ -57,6 +68,7 @@ class PlayingState extends GameState {
         this.gameController.gameEngine.addEntity(this.mike);
         this.gameController.gameEngine.addEntity(this.player);
         // this.gameController.gameEngine.addEntity(this.rat);
+        this.gameController.gameEngine.addEntity(this.spider);
         this.gameController.gameEngine.addEntity(this.storyManager);
         this.gameController.gameEngine.addEntity(this.worldManager);
         this.gameController.gameEngine.addEntity(this.camera);
@@ -120,13 +132,6 @@ class PlayingState extends GameState {
             this.worldManager.getCurrentRoom(this.player) === "foyer_floor1") {
             this.storyManager.triggerEvent('splitUpSequence');
         }
-
-        // // checking for trigger conditions; rat
-        // if (!this.storyManager.flags.hasSeenFirstRat && 
-        //     this.player.boundingBox.collide(this.rat.boundingBox)) {
-        //     this.storyManager.triggerEvent('firstRatEncounter');
-        // }
-
     }
 
     draw(ctx) {

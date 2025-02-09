@@ -21,9 +21,13 @@ class WorldManager {
             bedroom2: { x: 300, y: 100 },
             bedroom1: { x: 300, y: 0 },
             outside: { x: 400, y: 0 },
-            basement: { x: 500, y: 0 }
+            basement: { x: 500, y: 0 },
+            attic: { x: 700, y: 0 },
+            hiddenHallway: { x: 900, y: 0 }
         };
         
+
+
         this.loadMaps();
         
         // Initialize doors array
@@ -93,8 +97,21 @@ class WorldManager {
                 this.mapPositions.basement.y * params.tileSize * params.scale,
                 64 * params.tileSize * params.scale,
                 64 * params.tileSize * params.scale
+            ),
+            attic: new BoundingBox(
+                this.mapPositions.attic.x * params.tileSize * params.scale,
+                this.mapPositions.attic.y * params.tileSize * params.scale,
+                64 * params.tileSize * params.scale,
+                64 * params.tileSize * params.scale
+            ),
+            hiddenHallway: new BoundingBox(
+                this.mapPositions.hiddenHallway.x * params.tileSize * params.scale,
+                this.mapPositions.hiddenHallway.y * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale,
+                32 * params.tileSize * params.scale
             )
         };
+
 
         this.COLLISION_TILE_ID = 986;
         this.collisionMap = {}; // store collision data for each room
@@ -118,8 +135,7 @@ class WorldManager {
         // this.gameController.gameEngine.addEntity(this.chairUp);
 
 
-        this.bookOpen = new BookOpen(this, 106*params.tileSize*params.scale, 10*params.tileSize*params.scale, 32, 32);
-        this.gameController.gameEngine.addEntity(this.bookOpen);
+
 
 
         this.pot23 = new Pot23(this, 32*params.tileSize*params.scale, 112*params.tileSize*params.scale, 32, 32);
@@ -138,11 +154,102 @@ class WorldManager {
         
         this.crate3 = new Crate(this, 328*params.tileSize*params.scale, 8*params.tileSize*params.scale, 32, 32);
         this.gameController.gameEngine.addEntity(this.crate3);
+        //Foyer Floor 2
+        this.largeWeb3 = new largeWeb(this, 78*params.tileSize*params.scale, 6*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeWeb3);
+
+        this.largeWeb4 = new largeWeb(this, 72*params.tileSize*params.scale, 14*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeWeb4);
+
+        this.largeWeb5 = new largeWeb(this, 78*params.tileSize*params.scale, 14*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeWeb5);
+
+        this.largeWeb6 = new largeWeb2(this, 73*params.tileSize*params.scale, 22*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeWeb6);
+
+        this.smallWebEgg = new smallWebEgg(this, 79*params.tileSize*params.scale, 29*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.smallWebEgg);
+        //Foyer Floor 1
+
+        this.largeWeb2 = new largeWeb(this, 179*params.tileSize*params.scale, 16*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeWeb2);
+        this.largeWeb7 = new largeWeb2(this, 157*params.tileSize*params.scale, 9*params.tileSize*params.scale, 32, 32);  
+        this.gameController.gameEngine.addEntity(this.largeWeb7);
+
+
 
         this.cabinet2 = new Cabinet(this, 164*params.tileSize*params.scale, 18*params.tileSize*params.scale, 32, 32);
         this.gameController.gameEngine.addEntity(this.cabinet2);
 
-        this.worldObjects = [this.bookOpen, this.pot23, this.cabinet, this.crate, this.crate2, this.crate3, this.cabinet2, ];
+
+
+        //Study
+        this.bookOpen = new BookOpen(this, 115*params.tileSize*params.scale, 23*params.tileSize*params.scale, 32, 32);
+        this.gameController.gameEngine.addEntity(this.bookOpen);
+
+        this.chairRight = new ChairRight(this, 112*params.tileSize*params.scale, 23*params.tileSize*params.scale, 32, 32);
+        this.gameController.gameEngine.addEntity(this.chairRight);
+
+
+        this.largeBookcase = new LargeBookcase(this, 123*params.tileSize*params.scale, 6*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeBookcase);
+
+        this.largeBookcase2 = new LargeBookcase(this, 123*params.tileSize*params.scale, 10*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeBookcase2);
+
+        this.largeBookcase3 = new LargeBookcase(this, 123*params.tileSize*params.scale, 14*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeBookcase3);
+
+        this.largeBookcase4 = new LargeBookcase(this, 123*params.tileSize*params.scale, 18*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeBookcase4);
+
+        this.largeBookcase5 = new LargeBookcase(this, 123*params.tileSize*params.scale, 22*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeBookcase5);
+
+        this.largeBookcase6 = new LargeBookcase(this, 114*params.tileSize*params.scale, 6*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeBookcase6);
+
+        this.largeBookcase7 = new LargeBookcase(this, 114*params.tileSize*params.scale, 10*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeBookcase7);  
+
+        this.largeBookcase8 = new LargeBookcase(this, 114*params.tileSize*params.scale, 14*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeBookcase8);  
+
+        this.largeBookcase9 = new LargeBookcase(this, 114*params.tileSize*params.scale, 18*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeBookcase9);  
+
+        this.table = new Table(this, 114*params.tileSize*params.scale, 22*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.table);  
+
+        this.smallWeb = new smallWeb(this, 117*params.tileSize*params.scale, 4*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.smallWeb);  
+
+        this.largeWeb = new largeWeb(this, 119*params.tileSize*params.scale, 4*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeWeb);  
+        
+        //Hidden Hallway
+        this.largeWeb8 = new largeWeb(this, 906*params.tileSize*params.scale, 5*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.largeWeb8);  
+
+        this.mediumWeb = new mediumWeb(this, 923*params.tileSize*params.scale, 4*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.mediumWeb); 
+        
+        this.smallWeb2 = new smallWeb(this, 926*params.tileSize*params.scale, 8*params.tileSize*params.scale, 32, 32);    
+        this.gameController.gameEngine.addEntity(this.smallWeb2); 
+
+        
+
+
+
+
+
+
+        this.worldObjects = [this.bookOpen, this.pot23, this.cabinet, this.crate, this.crate2, this.crate3, this.cabinet2, this.largeBookcase, this.largeBookcase2,
+            this.largeBookcase3, this.largeBookcase4, this.largeBookcase5, this.largeBookcase6, this.largeBookcase7, this.largeBookcase8, this.largeBookcase9, this.table,
+            this.chairRight];
+
+
+
 
 
 
@@ -153,8 +260,8 @@ class WorldManager {
         // Ritual Book in Study
         const ritualBook = new InspectableItem(
             this.gameController,
-            106*params.tileSize*params.scale, 
-            10*params.tileSize*params.scale,
+            115*params.tileSize*params.scale, 
+            24*params.tileSize*params.scale,
             32, 32,
             () => {
                 if (this.gameController.gameStates.playing.player.hasItem(GameItems.RITUAL_BOOK)) {
@@ -270,17 +377,7 @@ class WorldManager {
         this.inspectableItems.addItem(kitchenFreezer);
 
 
-        const statue = new InspectableItem(
-            this.gameController,
-            422*params.tileSize*params.scale, 
-            38*params.tileSize*params.scale,
-            32, 32,
-            () => {
-                statue.showDialog("An ancient statue");
-                setTimeout(() => statue.hideDialog(), 3000);
-            }
-        );
-        this.inspectableItems.addItem(statue);
+
 
         this.gameController.gameEngine.addEntity(this.inspectableItems);
     }
@@ -298,8 +395,11 @@ class WorldManager {
             bedroom1: ASSET_MANAGER.getAsset("./assets/tmj/bedroom1.tmj"),
             dining_room: ASSET_MANAGER.getAsset("./assets/tmj/dining_room.tmj"),
             basement: ASSET_MANAGER.getAsset("./assets/tmj/basement.tmj"),
+            attic: ASSET_MANAGER.getAsset("./assets/tmj/attic.tmj"),
+            hiddenHallway: ASSET_MANAGER.getAsset("./assets/tmj/hiddenHallway.tmj"),
         };
         
+
         // Define tilesets
         this.tilesets = {
             'pixellands': {
@@ -474,30 +574,6 @@ class WorldManager {
             2 * params.tileSize * params.scale,
         ));
 
-        // // Door from dining room to living room
-        // this.doors.push(new Door(
-        //     this.gameController,
-        //     // Door position
-        //     -29 * params.tileSize * params.scale,
-        //     7 * params.tileSize * params.scale,
-        //     params.tileSize * params.scale,
-        //     params.tileSize * 2 * params.scale,
-        //     // Destination
-        //     252 * params.tileSize * params.scale,
-        //     7 * params.tileSize * params.scale
-        // ));
-        // // Door from living room to dining room
-        // this.doors.push(new Door(
-        //     this.gameController,
-        //     // Door position
-        //     250 * params.tileSize * params.scale,
-        //     7 * params.tileSize * params.scale,
-        //     params.tileSize * params.scale,
-        //     params.tileSize * 2 * params.scale,
-        //     // Destination
-        //     -31 * params.tileSize * params.scale,
-        //     8 * params.tileSize * params.scale
-        // ));
         // Door from living room to study
         this.doors.push(new Door(
             this.gameController,
@@ -558,17 +634,17 @@ class WorldManager {
             165 * params.tileSize * params.scale,
             27 * params.tileSize * params.scale
         ));
-        // Door from foyer floor 2 to nothing
+        // Door from foyer floor 2 to nowhere
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            73 * params.tileSize * params.scale,
-            19 * params.tileSize * params.scale,
+            80 * params.tileSize * params.scale,
+            22 * params.tileSize * params.scale,
             params.tileSize * params.scale,
             params.tileSize * 2 * params.scale,
             // Destination
-            72 * params.tileSize * params.scale,
-            19 * params.tileSize * params.scale,
+            80 * params.tileSize * params.scale,
+            22 * params.tileSize * params.scale,
             true,
         ));
         // Door from foyer floor 1 to basement
@@ -586,7 +662,6 @@ class WorldManager {
             GameItems.BASEMENT_KEY
         ));
         // Door from basement to foyer 1
-
         this.doors.push(new Door(
             this.gameController,
             // Door position
@@ -599,7 +674,62 @@ class WorldManager {
             17 * params.tileSize * params.scale
         ));
 
+
+
+        // HALLWAY DOORS
+        // Door from hidden hallway to bedroom1
+        this.doors.push(new Door(
+            this.gameController,
+            // Door position
+            905 * params.tileSize * params.scale,
+            7 * params.tileSize * params.scale,
+            params.tileSize * 1 * params.scale,
+            params.tileSize * 2 * params.scale,
+            // Destination
+            351 * params.tileSize * params.scale,
+            10 * params.tileSize * params.scale
+        ));
+        // Door from hidden hallway to attic
+        this.doors.push(new Door(
+            this.gameController,
+            // Door position
+            925 * params.tileSize * params.scale,
+            5 * params.tileSize * params.scale,
+            params.tileSize * 1 * params.scale,
+            params.tileSize * 2 * params.scale,
+            // Destination
+            744 * params.tileSize * params.scale,
+            36 * params.tileSize * params.scale
+        ));     
         
+        //BATHROOM DOORS
+        // Door from bedroom1 to hidden hallway
+        this.doors.push(new Door(
+            this.gameController,
+            // Door position
+            351 * params.tileSize * params.scale,
+            10 * params.tileSize * params.scale,
+            params.tileSize * 2 * params.scale,
+            params.tileSize * 1 * params.scale,
+            // Destination
+            906 * params.tileSize * params.scale,
+            7 * params.tileSize * params.scale
+
+        ));
+
+        //ATTIC DOORS
+        // Door from attic to hidden hallway
+        this.doors.push(new Door(
+            this.gameController,
+            // Door position
+            744 * params.tileSize * params.scale,
+            37 * params.tileSize * params.scale,
+            params.tileSize * 2 * params.scale,
+            params.tileSize * 1 * params.scale,
+            // Destination
+            925 * params.tileSize * params.scale,
+            6 * params.tileSize * params.scale
+        ));
         this.doors.forEach(door => this.gameController.gameEngine.addEntity(door));
     }
 

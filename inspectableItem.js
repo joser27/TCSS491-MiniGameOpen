@@ -191,7 +191,8 @@ const GameItems = Object.freeze({
     RUSTY_KEY: "Rusty Key",
     TALISMAN: "Talisman",
     RITUAL_DAGGER: "Ritual Dagger",
-    SECRET_ROOM_KEY: "Secret Room Key"
+    SECRET_ROOM_KEY: "Secret Room Key",
+    STEPPING_STOOL: "Stepping Stool"
 });
 
 const GAME_ITEMS_DATA = Object.freeze({
@@ -222,5 +223,9 @@ const GAME_ITEMS_DATA = Object.freeze({
     [GameItems.SECRET_ROOM_KEY]: {
         name: GameItems.SECRET_ROOM_KEY,
         description: "A peculiar key found in the hidden ritual room. It looks designed for a specific lock."
+    },
+    [GameItems.STEPPING_STOOL]: {
+        name: GameItems.STEPPING_STOOL,
+        description: "A small portable wooden stool. It looks like it could be used as a stepping stool."
     }
 });

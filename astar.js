@@ -10,10 +10,11 @@ class Node {
 }
 
 class AStar {
-    constructor(worldManager) {
+    constructor(worldManager, smoothPathing = true) {
         this.worldManager = worldManager;
         this.maxNodes = 1000; // Limit maximum nodes to explore
         this.gridSize = 32 * params.scale; // Use tile size for grid
+        this.smoothPathing = smoothPathing; 
     }
 
     findPath(startX, startY, endX, endY, currentRoom, worldObjects = []) {
@@ -69,7 +70,13 @@ class AStar {
             
             // Check if we reached the end
             if (currentX === end.x && currentY === end.y) {
-                return this.reconstructPath(cameFrom, current, this.gridSize);
+                // Modify the path reconstruction based on smoothPathing
+                if (this.smoothPathing) {
+                    return this.reconstructPath(cameFrom, current, this.gridSize);
+                } else {
+                    // Return grid-aligned path (more robotic movement)
+                    return this.reconstructGridPath(cameFrom, current, this.gridSize);
+                }
             }
 
             openSet.delete(current);
@@ -158,6 +165,20 @@ class AStar {
             path.unshift({
                 x: x * gridSize + gridSize / 2,
                 y: y * gridSize + gridSize / 2
+            });
+            current = cameFrom.get(current);
+        }
+        return path;
+    }
+
+    // Add new method for grid-aligned path
+    reconstructGridPath(cameFrom, current, gridSize) {
+        const path = [];
+        while (cameFrom.has(current)) {
+            const [x, y] = current.split(',').map(Number);
+            path.unshift({
+                x: x * gridSize,  // Align to grid
+                y: y * gridSize   // Align to grid
             });
             current = cameFrom.get(current);
         }

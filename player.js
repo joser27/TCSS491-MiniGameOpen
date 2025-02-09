@@ -32,7 +32,9 @@ class Player extends SpriteCharacter {
         };
         
         super(gameController, x, y, width, height, SPRITE);
-        this.speed = 4;
+        this.normalSpeed = 4;
+        this.debugSpeed = 30;
+        this.speed = this.normalSpeed;
         this.inventory = [];
         this.isPaused = false;
         this.z = 0;  
@@ -64,26 +66,37 @@ class Player extends SpriteCharacter {
         let newY = this.y;
         let moving = false;
 
+        // Update speed based on debug mode
+        this.speed = params.debug ? this.debugSpeed : this.normalSpeed;
+
         // Handle movement and animations
-        if (this.gameController.gameEngine.keys['w']) {
+        if (this.gameController.gameEngine.keys['w'] || 
+            this.gameController.gameEngine.keys['W'] || 
+            this.gameController.gameEngine.keys['ArrowUp']) {
             newY -= this.speed;
             this.currentAnimation = this.animations.walkUp;
             this.facing = 'up';
             moving = true;
         }
-        if (this.gameController.gameEngine.keys['s']) {
+        if (this.gameController.gameEngine.keys['s'] || 
+            this.gameController.gameEngine.keys['S'] || 
+            this.gameController.gameEngine.keys['ArrowDown']) {
             newY += this.speed;
             this.currentAnimation = this.animations.walkDown;
             this.facing = 'down';
             moving = true;
         }
-        if (this.gameController.gameEngine.keys['a']) {
+        if (this.gameController.gameEngine.keys['a'] || 
+            this.gameController.gameEngine.keys['A'] || 
+            this.gameController.gameEngine.keys['ArrowLeft']) {
             newX -= this.speed;
             this.currentAnimation = this.animations.walkLeft;
             this.facing = 'left';
             moving = true;
         }
-        if (this.gameController.gameEngine.keys['d']) {
+        if (this.gameController.gameEngine.keys['d'] || 
+            this.gameController.gameEngine.keys['D'] || 
+            this.gameController.gameEngine.keys['ArrowRight']) {
             newX += this.speed;
             this.currentAnimation = this.animations.walkRight;
             this.facing = 'right';
@@ -138,6 +151,14 @@ class Player extends SpriteCharacter {
                     break;
                 }
             }
+        }
+
+        if (params.debug) {
+            // In debug mode, directly update position without collision checks
+            this.x = newX;
+            this.y = newY;
+            this.boundingBox.update(this.x, this.y);
+            return;
         }
 
         // Update position based on combined collision results

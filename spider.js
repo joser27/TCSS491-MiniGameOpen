@@ -1,19 +1,18 @@
-class Rat extends Agent {
+class Spider extends Agent {
     constructor(gameController, x, y, width, height) {
         super(gameController, x, y, width, height);
-        this.speed = 2.5;
+        this.speed = 3; // Slightly faster
         
-        // Define rat sprite sheet layout
-        const RAT_SPRITE = {
+        const SPIDER_SPRITE = {
             SHEET: {
-                WIDTH: 284,    // Total width of sprite sheet
-                HEIGHT: 232,   // Total height of sprite sheet
-                COLUMNS: 4,    // Total columns in sprite sheet
-                ROWS: 4        // Total rows in sprite sheet
+                WIDTH: 240,    
+                HEIGHT: 256,   
+                COLUMNS: 3,    
+                ROWS: 4        
             },
             SIZE: {
-                WIDTH: 284 / 4,   // Width of each frame
-                HEIGHT: 232 / 4   // Height of each frame
+                WIDTH: 240 / 3,   
+                HEIGHT: 256 / 4   
             },
             SCALE: 2,
             FRAME_DURATION: 0.2,
@@ -24,160 +23,166 @@ class Rat extends Agent {
                     RIGHT: 2,
                     UP: 3
                 },
-                FRAMES: 4     // Each animation has 4 frames
+                FRAMES: 3     
+            }
+        };
+        const TRANSFORM_SPRITE = {
+            SHEET: {
+                WIDTH: 240,    
+                HEIGHT: 384,   
+                COLUMNS: 1,    
+                ROWS: 4        
+            },
+            SIZE: {
+                WIDTH: 240 / 1,   
+                HEIGHT: 256 / 4   
+            },
+            SCALE: 2,
+            FRAME_DURATION: 0.2,
+            ANIMATION: {
+                FRAMES: 3     
             }
         };
         
-        // Create animators for each direction
         this.animations = {
             walkRight: new Animator(
-                ASSET_MANAGER.getAsset("./assets/images/rat.png"), 
-                0,                                              // x start
-                RAT_SPRITE.SIZE.HEIGHT * RAT_SPRITE.ANIMATION.ROWS.RIGHT,  // y start
-                RAT_SPRITE.SIZE.WIDTH, 
-                RAT_SPRITE.SIZE.HEIGHT,
-                RAT_SPRITE.ANIMATION.FRAMES,
-
-                RAT_SPRITE.FRAME_DURATION,
-                RAT_SPRITE.SCALE
+                ASSET_MANAGER.getAsset("./assets/images/monster-spider.png"), 
+                0,                                              
+                SPIDER_SPRITE.SIZE.HEIGHT * SPIDER_SPRITE.ANIMATION.ROWS.RIGHT,  
+                SPIDER_SPRITE.SIZE.WIDTH, 
+                SPIDER_SPRITE.SIZE.HEIGHT,
+                SPIDER_SPRITE.ANIMATION.FRAMES,
+                SPIDER_SPRITE.FRAME_DURATION,
+                SPIDER_SPRITE.SCALE
             ),
             walkLeft: new Animator(
-                ASSET_MANAGER.getAsset("./assets/images/rat.png"), 
+                ASSET_MANAGER.getAsset("./assets/images/monster-spider.png"), 
                 0,
-                RAT_SPRITE.SIZE.HEIGHT * RAT_SPRITE.ANIMATION.ROWS.LEFT,
-                RAT_SPRITE.SIZE.WIDTH,
-                RAT_SPRITE.SIZE.HEIGHT,
-                RAT_SPRITE.ANIMATION.FRAMES,
-
-                RAT_SPRITE.FRAME_DURATION,
-                RAT_SPRITE.SCALE
+                SPIDER_SPRITE.SIZE.HEIGHT * SPIDER_SPRITE.ANIMATION.ROWS.LEFT,
+                SPIDER_SPRITE.SIZE.WIDTH,
+                SPIDER_SPRITE.SIZE.HEIGHT,
+                SPIDER_SPRITE.ANIMATION.FRAMES,
+                SPIDER_SPRITE.FRAME_DURATION,
+                SPIDER_SPRITE.SCALE
             ),
             walkUp: new Animator(
-                ASSET_MANAGER.getAsset("./assets/images/rat.png"), 
+                ASSET_MANAGER.getAsset("./assets/images/monster-spider.png"), 
                 0,
-                RAT_SPRITE.SIZE.HEIGHT * RAT_SPRITE.ANIMATION.ROWS.UP,
-                RAT_SPRITE.SIZE.WIDTH,
-                RAT_SPRITE.SIZE.HEIGHT,
-                RAT_SPRITE.ANIMATION.FRAMES,
-
-                RAT_SPRITE.FRAME_DURATION,
-                RAT_SPRITE.SCALE
+                SPIDER_SPRITE.SIZE.HEIGHT * SPIDER_SPRITE.ANIMATION.ROWS.UP,
+                SPIDER_SPRITE.SIZE.WIDTH,
+                SPIDER_SPRITE.SIZE.HEIGHT,
+                SPIDER_SPRITE.ANIMATION.FRAMES,
+                SPIDER_SPRITE.FRAME_DURATION,
+                SPIDER_SPRITE.SCALE
             ),
             walkDown: new Animator(
-                ASSET_MANAGER.getAsset("./assets/images/rat.png"), 
+                ASSET_MANAGER.getAsset("./assets/images/monster-spider.png"), 
                 0,
-                RAT_SPRITE.SIZE.HEIGHT * RAT_SPRITE.ANIMATION.ROWS.DOWN,
-                RAT_SPRITE.SIZE.WIDTH,
-                RAT_SPRITE.SIZE.HEIGHT,
-                RAT_SPRITE.ANIMATION.FRAMES,
-
-                RAT_SPRITE.FRAME_DURATION,
-                RAT_SPRITE.SCALE
-            )
+                SPIDER_SPRITE.SIZE.HEIGHT * SPIDER_SPRITE.ANIMATION.ROWS.DOWN,
+                SPIDER_SPRITE.SIZE.WIDTH,
+                SPIDER_SPRITE.SIZE.HEIGHT,
+                SPIDER_SPRITE.ANIMATION.FRAMES,
+                SPIDER_SPRITE.FRAME_DURATION,
+                SPIDER_SPRITE.SCALE
+            ),
+            // transform: new Animator(
+            //     ASSET_MANAGER.getAsset("./assets/images/monster-spider-behavior-male.png"), 
+            //     0,
+            //     TRANSFORM_SPRITE.SIZE.HEIGHT * TRANSFORM_SPRITE.ANIMATION.ROWS.TRANSFORM,
+            //     TRANSFORM_SPRITE.SIZE.WIDTH,
+            //     TRANSFORM_SPRITE.SIZE.HEIGHT,
+            //     TRANSFORM_SPRITE.ANIMATION.FRAMES,
+            //     TRANSFORM_SPRITE.FRAME_DURATION,
+            //     TRANSFORM_SPRITE.SCALE
+            // )
         };
         
-        this.currentAnimation = this.animations.walkDown;  // Default animation
+
+        this.currentAnimation = this.animations.walkDown;
         this.facing = 'down';
         
-        // bounding box
-        this.boundingBox = new BoundingBox(x, y, (width*1.5) * params.scale, (height*1.5) * params.scale);
+        // Smaller bounding box for spider
+        this.boundingBox = new BoundingBox(x, y, width * 2, height);
         
-        // room-based behavior
+        // Room-based behavior
         this.currentRoom = null;
         this.isHiding = false;
 
-        this.spawnDelay = 1000;
+        this.spawnDelay = 800; // Slightly faster spawn than rat
         this.spawnTimer = 0;  
         this.isSpawning = false; 
 
         this.pathfinder = null;
         this.currentPath = null;
         this.pathUpdateTimer = 0;
-        this.pathUpdateInterval = 500; 
-
+        this.pathUpdateInterval = 400; // More frequent path updates
 
         this.lastTargetX = 0;
         this.lastTargetY = 0;
-
-        // Add state control
         this.isChasing = false;
-        
-        // Add door transition handling
         this.lastPlayerPos = { x: 0, y: 0 };
         this.pathfindingDelay = false;
+
+        this.zIndex = 200;  
+        this.hasFixedZIndex = true; 
     }
 
     update() {
+        if (this.currentRoom === this.gameController.gameStates.playing.worldManager.getCurrentRoom(this.gameController.gameStates.playing.player)) {
+            this.startChasing();
+
+        }
         try {
-            // Initialize pathfinder if not already done
             if (!this.pathfinder && this.gameController.gameStates.playing) {
-                this.pathfinder = new AStar(this.gameController.gameStates.playing.worldManager);
+                this.pathfinder = new AStar(this.gameController.gameStates.playing.worldManager, false);
             }
 
             const player = this.gameController.gameStates.playing.player;
-            if (!player) {
-                console.warn("Player not found");
-                return;
-            }
+            if (!player) return;
 
-            // Only track room changes and handle transitions if chasing
             if (this.isChasing) {
                 const playerRoom = this.gameController.gameStates.playing.worldManager.getCurrentRoom(player);
 
-                // Check if player has moved significantly (possible door teleport)
                 const playerMovedFar = Math.abs(this.lastPlayerPos.x - player.x) > 100 || 
-                                    Math.abs(this.lastPlayerPos.y - player.y) > 100;
+                                     Math.abs(this.lastPlayerPos.y - player.y) > 100;
 
                 if (playerMovedFar) {
-                    // Player might have used a door, delay pathfinding briefly
                     this.pathfindingDelay = true;
                     this.currentPath = null;
                     setTimeout(() => {
                         this.pathfindingDelay = false;
-                    }, 500); // Half second delay
+                    }, 500);
                 }
 
-                // Update last known player position
                 this.lastPlayerPos = { x: player.x, y: player.y };
 
-                // Check if player changed rooms
                 if (this.currentRoom !== playerRoom) {
                     this.handleRoomTransition(playerRoom);
                 }
             }
 
-            // Handle spawn timer
             if (this.isSpawning && Date.now() - this.spawnTimer >= this.spawnDelay) {
                 this.isSpawning = false;
                 this.isHiding = false;
             }
 
-            // Only chase if all conditions are met
             if (!this.isHiding && !this.isSpawning && 
                 this.currentRoom === this.gameController.gameStates.playing.worldManager.getCurrentRoom(player) && 
                 this.isChasing && !this.pathfindingDelay) {
-                try {
-                    this.chasePlayer(player);
-                } catch (error) {
-                    console.warn("Pathfinding error:", error);
-                    this.currentPath = null;
-                }
+                this.chasePlayer(player);
             }
 
-            // Update bounding box
-            this.boundingBox.update(this.x, this.y);
+            this.boundingBox.update(this.x, this.y+50);
 
         } catch (error) {
-            console.error("Critical update error:", error);
-            this.isChasing = false; // Stop chasing on critical errors
+            console.error("Spider update error:", error);
+            this.isChasing = false;
         }
     }
 
     handleRoomTransition(newPlayerRoom) {
-        // Only handle room transitions if actively chasing
         if (!this.isChasing) return;
 
-        // Find the door the player just used
         const doors = this.gameController.gameStates.playing.worldManager.doors;
         const playerPos = this.gameController.gameStates.playing.player;
 
@@ -196,34 +201,20 @@ class Rat extends Agent {
         });
 
         if (nearestDoor) {
-            // Set spawn position but don't show immediately
             this.x = nearestDoor.x;
             this.y = nearestDoor.y;
             this.currentRoom = newPlayerRoom;
-            
-            // Start spawn timer
             this.isSpawning = true;
             this.spawnTimer = Date.now();
-            this.isHiding = true; // Hide the rat during spawn delay
-            
-            // Clear current path when changing rooms
+            this.isHiding = true;
             this.currentPath = null;
         }
     }
 
     chasePlayer(player) {
-        // Only update path if we're actually chasing
-        if (!this.isChasing) return;
+        if (!this.isChasing || !this.pathfinder) return;
 
-        // Add safety check for pathfinder
-        if (!this.pathfinder) {
-            console.warn("Pathfinder not initialized");
-            return;
-        }
-
-        if (!this.currentPath || 
-            Date.now() - this.pathUpdateTimer > 500) {
-            
+        if (!this.currentPath || Date.now() - this.pathUpdateTimer > this.pathUpdateInterval) {
             try {
                 let newPath = this.pathfinder.findPath(
                     this.x, 
@@ -233,68 +224,50 @@ class Rat extends Agent {
                     this.currentRoom
                 );
                 
-                // If we got a valid path, use it
                 if (newPath && newPath.length > 0 && newPath.length < 100) {
                     this.currentPath = newPath;
                     this.lastTargetX = player.x;
                     this.lastTargetY = player.y;
                 } else {
-                    // Fallback to direct path if no valid path found
                     this.currentPath = [{x: player.x, y: player.y}];
                 }
                 this.pathUpdateTimer = Date.now();
                 
             } catch (error) {
-                console.warn("Pathfinding error:", error);
-                // Fallback to direct path
+                console.warn("Spider pathfinding error:", error);
                 this.currentPath = [{x: player.x, y: player.y}];
             }
         }
 
-        // Follow path - no collision checks during movement
         if (this.currentPath && this.currentPath.length > 0) {
             const target = this.currentPath[0];
             const dx = target.x - this.x;
             const dy = target.y - this.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            // If we're close enough to current waypoint, move to next one
-            if (distance < 32) {  // One tile width
+            if (distance < 32) {
                 this.currentPath.shift();
                 return;
             }
 
-            // Move towards target without collision checks
             if (distance > 0) {
                 this.x += (dx / distance) * this.speed;
                 this.y += (dy / distance) * this.speed;
 
-                // Update animation based on primary movement direction
+                // Update animation based on movement
                 if (Math.abs(dx) > Math.abs(dy)) {
-                    if (dx > 0) {
-                        this.currentAnimation = this.animations.walkRight;
-                        this.facing = 'right';
-                    } else {
-                        this.currentAnimation = this.animations.walkLeft;
-                        this.facing = 'left';
-                    }
+                    this.currentAnimation = dx > 0 ? this.animations.walkRight : this.animations.walkLeft;
+                    this.facing = dx > 0 ? 'right' : 'left';
                 } else {
-                    if (dy > 0) {
-                        this.currentAnimation = this.animations.walkDown;
-                        this.facing = 'down';
-                    } else {
-                        this.currentAnimation = this.animations.walkUp;
-                        this.facing = 'up';
-                    }
+                    this.currentAnimation = dy > 0 ? this.animations.walkDown : this.animations.walkUp;
+                    this.facing = dy > 0 ? 'down' : 'up';
                 }
             }
         }
     }
 
     draw(ctx) {
-        // Only draw if not hiding
         if (!this.isHiding) {
-            // Draw the rat sprite
             this.currentAnimation.drawFrame(
                 this.gameController.gameEngine.clockTick,
                 ctx,
@@ -302,7 +275,6 @@ class Rat extends Agent {
                 (this.y-40) - this.gameController.gameStates.playing.camera.y
             );
             
-            // Debug information
             const debugCheckbox = document.getElementById('debug');
             if (debugCheckbox.checked) {
                 // Draw bounding box
@@ -315,7 +287,7 @@ class Rat extends Agent {
                     this.boundingBox.height
                 );
 
-                // Draw state information above rat
+                // Draw debug info
                 ctx.fillStyle = "cyan";
                 ctx.strokeStyle = "black";
                 ctx.font = "12px Arial";
@@ -335,7 +307,7 @@ class Rat extends Agent {
                     ctx.fillText(text, xPos, yPos);
                 });
 
-                // Draw path if it exists
+                // Draw path
                 if (this.currentPath) {
                     ctx.strokeStyle = 'yellow';
                     ctx.lineWidth = 2;
@@ -356,15 +328,14 @@ class Rat extends Agent {
         }
     }
 
-    // Add methods to control chase behavior
     startChasing() {
         this.isChasing = true;
-        console.log("Rat is chasing");
+        console.log("Spider is chasing");
     }
 
     stopChasing() {
         this.isChasing = false;
         this.currentPath = null;
-        console.log("Rat is not chasing");
+        console.log("Spider is not chasing");
     }
 }

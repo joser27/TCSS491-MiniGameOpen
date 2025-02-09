@@ -35,8 +35,15 @@ class Controller {
     }
 
     update() {
-        
+        const debugCheckbox = document.getElementById('debug');
+        if (debugCheckbox.checked) {
+            params.debug = true;
+        } else {
+            params.debug = false;
+        };
     }
+
+
 
     draw(ctx) {
         this.drawGrid(ctx);
