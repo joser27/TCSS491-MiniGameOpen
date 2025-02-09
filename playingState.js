@@ -58,9 +58,14 @@ class PlayingState extends GameState {
         this.outsideAmbience = ASSET_MANAGER.getAsset("./assets/audio/night-cricket-ambience-22484.mp3");
         
         this.wasIPressed = false;
+
+        // Add light manager
+        this.lightManager = new LightManager(gameController);
     }
 
     initEntities() {
+        this.lightManager = new LightManager(this.gameController);
+        this.gameController.gameEngine.addEntity(this.lightManager);
         this.worldManager = new WorldManager(this.gameController);
         this.storyManager = new StoryManager(this.gameController, this.player, this.camera);
         this.gameController.gameEngine.addEntity(this.jake);
@@ -132,6 +137,9 @@ class PlayingState extends GameState {
             this.worldManager.getCurrentRoom(this.player) === "foyer_floor1") {
             this.storyManager.triggerEvent('splitUpSequence');
         }
+
+        // Update lighting
+        this.lightManager.update();
     }
 
     draw(ctx) {
