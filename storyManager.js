@@ -10,6 +10,9 @@ class StoryManager {
             hasUnlockedBasement: false,
             hasSplitUp: false,
             hasFinishedSearching: false,
+            hasStartedBedroomScene: false,
+            hasStartedHallwayScene: false,
+            hasStartedAtticScene: false,
         };
         this.currentEvent = null;
         this.isInCutscene = false;
@@ -192,8 +195,8 @@ class StoryManager {
                         this.currentEvent = new CutsceneEvent(
                             this.gameController,
                             [
-                                "Alex: Mike, I really don't think we should be here...",
-                                "Mike: Just keep looking for valuables, will you?"
+                                "Alex: The master bedroom is where people keep their most valuable stuff, right? Let's check there.",
+                                "Mike: Now you're thinking like a professional! Let's go!"
                             ],
                             () => {
                                 this.gameController.gameStates.playing.jake.followPlayer(this.player);
@@ -203,6 +206,82 @@ class StoryManager {
                     }
                 }, 60);
                 this.flags.hasFinishedSearching = true;
+                break;
+            case 'enterBedroom':
+                if (!this.flags.hasStartedBedroomScene) {
+                    this.flags.hasStartedBedroomScene = true;
+                    this.isInCutscene = true;
+                    this.player.isPaused = false; 
+
+                    const jake = this.gameController.gameStates.playing.jake;
+                    
+                    // Add 5 second timer before Jake starts moving
+                    setTimeout(() => {
+                        // First make Jake walk to the location
+                        const targetX = 351 * params.tileSize * params.scale;
+                        const targetY = 10 * params.tileSize * params.scale;
+                        jake.moveToLocation(targetX, targetY);
+
+                        // Check every 100ms if Jake has reached the destination
+                        const checkInterval = setInterval(() => {
+                            if (!jake.isFollowing) {  // Jake stops following when he reaches destination
+                                clearInterval(checkInterval);
+                                // Start dialogue after reaching location
+                                this.currentEvent = new CutsceneEvent(
+                                    this.gameController,
+                                    ["Jake: I found something!"],
+                                    () => {
+                                        // Any additional actions after dialogue
+                                    }
+                                );
+                            }
+                        }, 100);
+                    }, 5000);
+                }
+                break;
+            case 'enterHiddenHallway':
+                if (!this.flags.hasStartedHallwayScene) {
+                    this.flags.hasStartedHallwayScene = true;
+                    this.isInCutscene = true;
+                    this.player.isPaused = false;
+
+                    const jake = this.gameController.gameStates.playing.jake;
+                    jake.x= 920* params.tileSize * params.scale;
+                    jake.y= 8 * params.tileSize * params.scale;
+
+                    // First make Jake walk to the location
+                    const targetX = 925 * params.tileSize * params.scale;
+                    const targetY = 5 * params.tileSize * params.scale;
+                    jake.moveToLocation(targetX, targetY);
+
+                    // Check every 100ms if Jake has reached the destination
+                    const checkInterval = setInterval(() => {
+                        if (!jake.isFollowing) {  // Jake stops following when he reaches destination
+                            clearInterval(checkInterval);
+                            
+                            // Teleport Jake to new position
+                            jake.x = 731 * params.tileSize * params.scale;
+                            jake.y = 35 * params.tileSize * params.scale;
+                        }
+                    }, 100);
+                }
+                break;
+            case 'enterAttic':
+                if (!this.flags.hasStartedAtticScene) {
+                    this.flags.hasStartedAtticScene = true;
+                    this.isInCutscene = true;
+                    this.player.isPaused = true;
+
+                    this.currentEvent = new CutsceneEvent(
+                        this.gameController,
+                        [
+                            "Jake: ALEX HELP THERES A GIANT SPIDER",
+                        ],
+                        () => {
+                            this.player.isPaused = false;
+                        }
+                    );
+                }
                 break;
         }
     }

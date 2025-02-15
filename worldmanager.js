@@ -443,7 +443,8 @@ class WorldManager {
             params.tileSize * 2 * params.scale,
             // Destination
             -120 * params.tileSize * params.scale,
-            5 * params.tileSize * params.scale
+            5 * params.tileSize * params.scale,
+            true
         ));
 
         // Door from foyer floor 2 to bedroom 2
@@ -456,7 +457,8 @@ class WorldManager {
             params.tileSize * 1 * params.scale,
             // Destination
             347 * params.tileSize * params.scale,
-            125 * params.tileSize * params.scale
+            125 * params.tileSize * params.scale,
+            true
         ));
 
         // Door from foyer floor 2 to bedroom 1
@@ -470,15 +472,14 @@ class WorldManager {
             // Destination
             345 * params.tileSize * params.scale,
             24 * params.tileSize * params.scale,
-            true,
-            GameItems.RUSTY_KEY
+            
         ));
         // Door from bedroom 1 to foyer floor 2
 
         this.doors.push(new Door(
             this.gameController,
             // Door position
-            344 * params.tileSize * params.scale,
+            345 * params.tileSize * params.scale,
             25 * params.tileSize * params.scale,
             params.tileSize * 2*params.scale,
             params.tileSize * 1 * params.scale,
@@ -497,7 +498,8 @@ class WorldManager {
             params.tileSize * 2 * params.scale,
             // Destination
             61 * params.tileSize * params.scale,
-            2 * params.tileSize * params.scale
+            2 * params.tileSize * params.scale,
+            true
         ));
 
         // Door from foyer floor 2 to foyer floor 1
@@ -534,7 +536,8 @@ class WorldManager {
             params.tileSize * 2 * params.scale,
             // Destination
             229 * params.tileSize * params.scale,
-            23 * params.tileSize * params.scale
+            23 * params.tileSize * params.scale,
+            true
         ));
         // Door from kitchen to foyer floor 1
         this.doors.push(new Door(
@@ -620,7 +623,8 @@ class WorldManager {
             params.tileSize * 2 * params.scale,
             // Destination
             102 * params.tileSize * params.scale,
-            23 * params.tileSize * params.scale
+            23 * params.tileSize * params.scale,
+            true
         ));    
         // Outside to foyer floor 1
         this.doors.push(new Door(

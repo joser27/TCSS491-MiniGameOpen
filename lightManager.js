@@ -10,7 +10,7 @@ class LightManager {
         this.lightCtx = this.lightCanvas.getContext('2d');
         
         // Fixed light properties
-        this.ambientLight = 0.85;  
+        this.ambientLight = 0.7;  
         this.lightRadius = 200;
         this.zIndex = 1000;
     }
@@ -46,8 +46,8 @@ class LightManager {
     addLight(x, y, radius = this.lightRadius) {
         // Create a radial gradient for smooth light falloff
         const gradient = this.lightCtx.createRadialGradient(x, y, 0, x, y, radius);
-        gradient.addColorStop(0, 'rgba(0, 0, 0, 1)');      // Center of light (fully transparent)
-        gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.8)');  // Mid transition
+        gradient.addColorStop(0, 'rgba(0, 0, 0, 0.8)');      // Center of light (fully transparent)
+        gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.5)');  // Mid transition
         gradient.addColorStop(0.8, 'rgba(0, 0, 0, 0.3)');  // Soft outer transition
         gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');      // Edge of light (fully opaque)
         

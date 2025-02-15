@@ -503,6 +503,68 @@ class Jake extends SpriteCharacter {
             }
         }
     }
+
+    moveToLocation(targetX, targetY) {
+        this.stopFollowing();
+        this.isFollowing = true;
+        
+        // Create a one-time path to the target
+        this.currentPath = this.pathfinder.findPath(
+            this.x,
+            this.y,
+            targetX,
+            targetY,
+            this.currentRoom,
+            this.gameController.gameStates.playing.worldManager.worldObjects
+        );
+
+        // Override the followPlayer method temporarily
+        this.originalFollowPlayer = this.followPlayer;
+        this.followPlayer = () => {
+            if (this.currentPath && this.currentPath.length > 0) {
+                const target = this.currentPath[0];
+                const dx = target.x - this.x;
+                const dy = target.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                // Move to next waypoint if close enough
+                if (distance < 32) {
+                    this.currentPath.shift();
+                    if (this.currentPath.length === 0) {
+                        // Restore original behavior when destination is reached
+                        this.followPlayer = this.originalFollowPlayer;
+                        this.stopFollowing();
+                    }
+                    return;
+                }
+
+                // Move towards target
+                if (distance > 0) {
+                    this.x += (dx / distance) * this.speed;
+                    this.y += (dy / distance) * this.speed;
+
+                    // Update animation based on movement direction
+                    if (Math.abs(dx) > Math.abs(dy)) {
+                        if (dx > 0) {
+                            this.currentAnimation = this.animations.walkRight;
+                            this.facing = 'right';
+                        } else {
+                            this.currentAnimation = this.animations.walkLeft;
+                            this.facing = 'left';
+                        }
+                    } else {
+                        if (dy > 0) {
+                            this.currentAnimation = this.animations.walkDown;
+                            this.facing = 'down';
+                        } else {
+                            this.currentAnimation = this.animations.walkUp;
+                            this.facing = 'up';
+                        }
+                    }
+                }
+            }
+        };
+    }
 }
 
 class Lily extends SpriteCharacter {

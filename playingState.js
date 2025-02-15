@@ -4,8 +4,8 @@ class PlayingState extends GameState {
 
         this.player = new Player(
             this.gameController, 
-            (430 * params.tileSize) * params.scale,  //430
-            (42 * params.tileSize) * params.scale,   //42
+            (155 * params.tileSize) * params.scale,  //430
+            (14 * params.tileSize) * params.scale,   //42
             params.tileSize, 
             params.tileSize
 
@@ -44,16 +44,15 @@ class PlayingState extends GameState {
 
         this.spider = new Spider(
             this.gameController, 
-            (-135 * params.tileSize) * params.scale,
-            (18 * params.tileSize) * params.scale, 
+            (716 * params.tileSize) * params.scale,
+            (44 * params.tileSize) * params.scale, 
             params.tileSize, 
             params.tileSize
 
         );
 
-        // Set initial room
-        this.rat.currentRoom = "bathroom";
-        this.spider.currentRoom = "bathroom";
+
+        this.spider.currentRoom = "attic";
 
         this.outsideAmbience = ASSET_MANAGER.getAsset("./assets/audio/night-cricket-ambience-22484.mp3");
         
@@ -136,6 +135,20 @@ class PlayingState extends GameState {
         if (!this.storyManager.flags.hasSplitUp && 
             this.worldManager.getCurrentRoom(this.player) === "foyer_floor1") {
             this.storyManager.triggerEvent('splitUpSequence');
+        }
+
+        if (!this.storyManager.flags.hasEnteredBedroom && 
+            this.worldManager.getCurrentRoom(this.jake) === "bedroom1") {
+            this.storyManager.triggerEvent('enterBedroom');
+        }
+
+        if (!this.storyManager.flags.hasStartedHallwayScene && 
+            this.worldManager.getCurrentRoom(this.player) === "hiddenHallway") {
+            this.storyManager.triggerEvent('enterHiddenHallway');
+        }
+        if (!this.storyManager.flags.hasStartedAtticScene && 
+            this.worldManager.getCurrentRoom(this.player) === "attic") {
+            this.storyManager.triggerEvent('enterAttic');
         }
 
         // Update lighting
