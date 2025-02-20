@@ -707,19 +707,7 @@ class WorldManager {
         ));     
         
         //BATHROOM DOORS
-        // Door from bedroom1 to hidden hallway
-        this.doors.push(new Door(
-            this.gameController,
-            // Door position
-            351 * params.tileSize * params.scale,
-            10 * params.tileSize * params.scale,
-            params.tileSize * 2 * params.scale,
-            params.tileSize * 1 * params.scale,
-            // Destination
-            906 * params.tileSize * params.scale,
-            7 * params.tileSize * params.scale
 
-        ));
 
         //ATTIC DOORS
         // Door from attic to hidden hallway
@@ -734,6 +722,21 @@ class WorldManager {
             925 * params.tileSize * params.scale,
             6 * params.tileSize * params.scale
         ));
+
+        // Store the hidden door configuration separately
+        this.hiddenDoor = {
+            from: {
+                x: 351 * params.tileSize * params.scale,
+                y: 10 * params.tileSize * params.scale,
+                width: params.tileSize * 2 * params.scale,
+                height: params.tileSize * 1 * params.scale
+            },
+            to: {
+                x: 906 * params.tileSize * params.scale,
+                y: 7 * params.tileSize * params.scale
+            }
+        };
+
         this.doors.forEach(door => this.gameController.gameEngine.addEntity(door));
     }
 
@@ -968,6 +971,22 @@ class WorldManager {
 
     addWorldObject(object) {
         this.worldObjects.push(object);
+    }
+
+    // Add new method to reveal the hidden door
+    revealHiddenDoor() {
+        const newDoor = new Door(
+            this.gameController,
+            this.hiddenDoor.from.x,
+            this.hiddenDoor.from.y,
+            this.hiddenDoor.from.width,
+            this.hiddenDoor.from.height,
+            this.hiddenDoor.to.x,
+            this.hiddenDoor.to.y
+        );
+        
+        this.doors.push(newDoor);
+        this.gameController.gameEngine.addEntity(newDoor);
     }
 }
 

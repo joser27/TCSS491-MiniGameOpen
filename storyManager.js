@@ -229,9 +229,15 @@ class StoryManager {
                                 // Start dialogue after reaching location
                                 this.currentEvent = new CutsceneEvent(
                                     this.gameController,
-                                    ["Jake: I found something!"],
+                                    [
+                                        "Jake: I found something!",
+                                        "Alex: What is it?",
+                                        "Jake: There's some kind of mechanism behind this bookshelf...",
+                                        "Jake: *click* Got it!",
+                                        "Alex: A hidden door?!"
+                                    ],
                                     () => {
-                                        // Any additional actions after dialogue
+                                        this.gameController.gameStates.playing.worldManager.revealHiddenDoor();
                                     }
                                 );
                             }
