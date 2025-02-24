@@ -4,8 +4,8 @@ class PlayingState extends GameState {
 
         this.player = new Player(
             this.gameController, 
-            (155 * params.tileSize) * params.scale,  //430
-            (14 * params.tileSize) * params.scale,   //42
+            (430 * params.tileSize) * params.scale,  //430
+            (42 * params.tileSize) * params.scale,   //42
             params.tileSize, 
             params.tileSize
 
