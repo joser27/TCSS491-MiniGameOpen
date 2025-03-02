@@ -125,6 +125,16 @@ class Spider extends Agent {
 
         this.zIndex = 200;  
         this.hasFixedZIndex = true; 
+
+        // Chase persistence properties
+        this.chaseCounter = Math.floor(Math.random() * 3) + 2; // Random number between 2-4 room transitions
+        this.lastRoom = null;
+
+        // Initial position in attic
+        this.initialX = 716 * params.tileSize * params.scale;
+        this.initialY = 44 * params.tileSize * params.scale;
+        this.doorsPassed = 0;
+        this.maxDoors = 2;
     }
 
     update() {
@@ -183,6 +193,21 @@ class Spider extends Agent {
     handleRoomTransition(newPlayerRoom) {
         if (!this.isChasing) return;
 
+        // Increment doors passed counter
+        this.doorsPassed++;
+        console.log("Spider passed through door:", this.doorsPassed);
+
+        // If exceeded max doors, stop chasing and return to attic
+        if (this.doorsPassed >= this.maxDoors) {
+            this.stopChasing();
+            this.x = this.initialX;
+            this.y = this.initialY;
+            this.currentRoom = "attic";
+            this.isHiding = true;
+            return;
+        }
+
+        // Normal door transition logic
         const doors = this.gameController.gameStates.playing.worldManager.doors;
         const playerPos = this.gameController.gameStates.playing.player;
 
@@ -329,13 +354,17 @@ class Spider extends Agent {
     }
 
     startChasing() {
-        this.isChasing = true;
-        console.log("Spider is chasing");
+        if (!this.isChasing) {
+            this.isChasing = true;
+            this.doorsPassed = 0;
+            console.log("Spider started chasing");
+        }
     }
 
     stopChasing() {
         this.isChasing = false;
         this.currentPath = null;
-        console.log("Spider is not chasing");
+        this.doorsPassed = 0;
+        console.log("Spider stopped chasing and returned to attic");
     }
 }
